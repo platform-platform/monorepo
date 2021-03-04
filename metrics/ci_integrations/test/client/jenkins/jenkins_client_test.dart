@@ -539,5 +539,87 @@ void main() {
 
       expect(result, completion(equals(expected)));
     });
+
+    test(
+      ".fetchJenkinsInstanceInfo() throws an ArgumentError if the given jenkins url is null",
+      () {
+        expect(
+          () => jenkinsClient.fetchJenkinsInstanceInfo(null),
+          throwsArgumentError,
+        );
+      },
+    );
+
+    test(
+      ".fetchJenkinsInstanceInfo() returns an error if the given jenkins url is not found",
+      () async {
+        final jenkinsUrl = '${jenkinsMockServer.url}/not_found/login';
+
+        final interactionResult = await jenkinsClient.fetchJenkinsInstanceInfo(
+          jenkinsUrl,
+        );
+
+        expect(interactionResult.isError, isTrue);
+      },
+    );
+
+    test(
+      ".fetchJenkinsInstanceInfo() returns an error if the given jenkins url does not exist",
+      () async {
+        final jenkinsUrl = '${jenkinsMockServer.url}/not-found';
+
+        final interactionResult = await jenkinsClient.fetchJenkinsInstanceInfo(
+          jenkinsUrl,
+        );
+
+        expect(interactionResult.isError, isTrue);
+      },
+    );
+
+    test(
+      ".fetchJenkinsInstanceInfo() returns jenkins instance info if the given jenkins url is valid",
+      () async {
+        final jenkinsUrl = jenkinsMockServer.url;
+
+        final interactionResult = await jenkinsClient.fetchJenkinsInstanceInfo(
+          jenkinsUrl,
+        );
+
+        final jenkinsInstanceInfo = interactionResult.result;
+
+        expect(jenkinsInstanceInfo, isNotNull);
+      },
+    );
+
+    test(
+      ".fetchJenkinsUser() throws an ArgumentError if the given auth is null",
+      () {
+        expect(() => jenkinsClient.fetchJenkinsUser(null), throwsArgumentError);
+      },
+    );
+
+    test(
+      ".fetchJenkinsUser() returns an error if the given auth is not valid",
+      () async {
+        final auth = BearerAuthorization('invalid');
+
+        final interactionResult = await jenkinsClient.fetchJenkinsUser(auth);
+
+        expect(interactionResult.isError, isTrue);
+      },
+    );
+
+    test(
+      ".fetchJenkinsUser() returns a jenkins user if the given auth is valid",
+      () async {
+        final interactionResult = await jenkinsClient.fetchJenkinsUser(
+          authorization,
+        );
+
+        final jenkinsUser = interactionResult.result;
+
+        expect(jenkinsUser, isNotNull);
+      },
+    );
   });
 }

@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:io';
@@ -13,6 +13,7 @@ import 'package:ci_integration/client/jenkins/model/jenkins_building_job.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_job.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_multi_branch_job.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_query_limits.dart';
+import 'package:ci_integration/client/jenkins/model/jenkins_user.dart';
 
 import '../../../test_utils/mock_server_utils.dart';
 
@@ -79,6 +80,24 @@ class JenkinsMockServer extends ApiMockServer {
             '/job/test/job/master/1/artifact/coverage/test.json',
           ),
           dispatcher: MockServerUtils.notFoundResponse,
+        ),
+        RequestHandler.get(
+          pathMatcher: ExactPathMatcher(
+            '/login',
+          ),
+          dispatcher: _jenkinsVersionResponse,
+        ),
+        RequestHandler.get(
+          pathMatcher: ExactPathMatcher(
+            '/not-found/login',
+          ),
+          dispatcher: MockServerUtils.notFoundResponse,
+        ),
+        RequestHandler.get(
+          pathMatcher: ExactPathMatcher(
+            '/me${JenkinsConstants.jsonApiPath}',
+          ),
+          dispatcher: _jenkinsUserResponse,
         ),
       ];
 
@@ -207,7 +226,7 @@ class JenkinsMockServer extends ApiMockServer {
       response = _buildMultiBranchJob();
     }
 
-    await MockServerUtils.writeResponse(request, response);
+    await MockServerUtils.writeResponse(request, body: response);
   }
 
   /// Responses with a jenkins build for the given [request].
@@ -216,7 +235,9 @@ class JenkinsMockServer extends ApiMockServer {
     final buildUrl = '$url/job/test/$buildNumber';
     final jenkinsBuild = JenkinsBuild(number: buildNumber, url: buildUrl);
 
-    await MockServerUtils.writeResponse(request, jenkinsBuild.toJson());
+    final response = jenkinsBuild.toJson();
+
+    await MockServerUtils.writeResponse(request, body: response);
   }
 
   /// Responses with a [JenkinsBuildingJob] for the given [request].
@@ -234,7 +255,7 @@ class JenkinsMockServer extends ApiMockServer {
       response = _buildBuildingJob();
     }
 
-    await MockServerUtils.writeResponse(request, response);
+    await MockServerUtils.writeResponse(request, body: response);
   }
 
   /// Responses with a list of [JenkinsBuildArtifact]s for the given [request].
@@ -258,7 +279,7 @@ class JenkinsMockServer extends ApiMockServer {
           .sublist(limits.lower, limits.upper == 0 ? 0 : limits.upper - 1);
     }
 
-    await MockServerUtils.writeResponse(request, _response);
+    await MockServerUtils.writeResponse(request, body: _response);
   }
 
   /// Responses with artifact content for the given [request].
@@ -269,6 +290,26 @@ class JenkinsMockServer extends ApiMockServer {
       'pct': 40,
     };
 
-    await MockServerUtils.writeResponse(request, artifactContent);
+    await MockServerUtils.writeResponse(request, body: artifactContent);
+  }
+
+  /// Responses with the Jenkins instance version in response headers
+  /// and an empty body.
+  Future<void> _jenkinsVersionResponse(HttpRequest request) async {
+    const jenkinsVersionHeader = 'X-Jenkins';
+
+    const headers = {jenkinsVersionHeader: '1.0'};
+
+    await MockServerUtils.writeResponse(request, headers: headers);
+  }
+
+  /// Responses with the [JenkinsUser] for the given [request].
+  Future<void> _jenkinsUserResponse(HttpRequest request) async {
+    print('here');
+    const jenkinsUser = JenkinsUser(id: '1', fullName: 'name');
+
+    final responseBody = jenkinsUser.toJson();
+
+    await MockServerUtils.writeResponse(request, body: responseBody);
   }
 }

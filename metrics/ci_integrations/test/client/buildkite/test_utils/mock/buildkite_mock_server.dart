@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:io';
@@ -123,7 +123,7 @@ class BuildkiteMockServer extends ApiMockServer {
 
     final _response = builds.map((build) => build.toJson()).toList();
 
-    await MockServerUtils.writeResponse(request, _response);
+    await MockServerUtils.writeResponse(request, body: _response);
   }
 
   /// Responses with a list of [BuildkiteArtifact]s.
@@ -143,7 +143,7 @@ class BuildkiteMockServer extends ApiMockServer {
 
     final _response = artifacts.map((artifact) => artifact.toJson()).toList();
 
-    await MockServerUtils.writeResponse(request, _response);
+    await MockServerUtils.writeResponse(request, body: _response);
   }
 
   /// Responses with a [BuildkiteToken].
@@ -154,7 +154,7 @@ class BuildkiteMockServer extends ApiMockServer {
 
     final tokenJson = token.toJson();
 
-    await MockServerUtils.writeResponse(request, tokenJson);
+    await MockServerUtils.writeResponse(request, body: tokenJson);
   }
 
   /// Responses with a [BuildkiteOrganization].
@@ -167,7 +167,7 @@ class BuildkiteMockServer extends ApiMockServer {
 
     final organizationJson = organization.toJson();
 
-    await MockServerUtils.writeResponse(request, organizationJson);
+    await MockServerUtils.writeResponse(request, body: organizationJson);
   }
 
   /// Responses with a [BuildkitePipeline].
@@ -180,7 +180,7 @@ class BuildkiteMockServer extends ApiMockServer {
 
     final pipelineJson = pipeline.toJson();
 
-    await MockServerUtils.writeResponse(request, pipelineJson);
+    await MockServerUtils.writeResponse(request, body: pipelineJson);
   }
 
   /// Redirects to the artifact download URL.

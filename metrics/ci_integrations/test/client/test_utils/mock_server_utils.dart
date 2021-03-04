@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:convert';
@@ -7,12 +7,23 @@ import 'dart:typed_data';
 
 /// A class that holds methods for processing requests in mock servers.
 class MockServerUtils {
-  /// Writes the given [response] to the given [request].
+  /// Writes the given [body] and [headers] to the given [request.response].
   static Future<void> writeResponse(
-    HttpRequest request,
-    dynamic response,
-  ) async {
-    request.response.write(jsonEncode(response));
+    HttpRequest request, {
+    dynamic body,
+    Map<String, String> headers,
+  }) async {
+    if (body != null) {
+      request.response.write(jsonEncode(body));
+    }
+
+    if (headers != null) {
+      for (final header in headers.keys) {
+        final value = headers[header];
+
+        request.response.headers.set(header, value, preserveHeaderCase: true);
+      }
+    }
 
     await request.response.flush();
     await request.response.close();
@@ -42,6 +53,6 @@ class MockServerUtils {
 
   /// Returns a [Uint8List] to emulate download.
   static Future<void> downloadResponse(HttpRequest request) async {
-    await MockServerUtils.writeResponse(request, Uint8List.fromList([]));
+    await MockServerUtils.writeResponse(request, body: Uint8List.fromList([]));
   }
 }

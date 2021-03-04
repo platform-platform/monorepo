@@ -5,14 +5,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ci_integration/cli/logger/mixin/logger_mixin.dart';
+import 'package:ci_integration/client/github_actions/github_actions_client.dart';
 import 'package:ci_integration/client/jenkins/builder/jenkins_url_builder.dart';
 import 'package:ci_integration/client/jenkins/constants/tree_query.dart';
 import 'package:ci_integration/client/jenkins/deserializer/jenkins_build_deserializer.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_build.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_build_artifact.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_building_job.dart';
+import 'package:ci_integration/client/jenkins/model/jenkins_instance_info.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_job.dart';
 import 'package:ci_integration/client/jenkins/model/jenkins_query_limits.dart';
+import 'package:ci_integration/client/jenkins/model/jenkins_user.dart';
 import 'package:ci_integration/util/authorization/authorization.dart';
 import 'package:ci_integration/util/model/interaction_result.dart';
 import 'package:ci_integration/util/url/url_utils.dart';
@@ -83,18 +86,25 @@ class JenkinsClient with LoggerMixin {
   /// Awaits [responseFuture] and handles the result. If either the provided
   /// future throws or [HttpResponse.statusCode] is not equal to
   /// [successStatusCode] (defaults to [HttpStatus.ok]) this method will
-  /// result with [InteractionResult.error]. Otherwise, delegates parsing
-  /// [Response.body] JSON to the [bodyParser] method.
+  /// result with [InteractionResult.error]. Otherwise, delegates processing
+  /// the [Response] to the [responseProcessor] callback.
   Future<InteractionResult<T>> _handleResponse<T>(
     Future<Response> responseFuture,
-    BodyParserCallback<T> bodyParser,
+    ResponseProcessingCallback<T> responseProcessor,
   ) async {
     try {
       final response = await responseFuture;
 
       if (response.statusCode == HttpStatus.ok) {
-        final body = jsonDecode(response.body) as Map<String, dynamic>;
-        return bodyParser(body);
+        final responseBody = response.body;
+
+        final json = responseBody.isNotEmpty
+            ? jsonDecode(response.body) as Map<String, dynamic>
+            : null;
+
+        final headers = response.headers;
+
+        return responseProcessor(json, headers);
       } else {
         final reason = response.body == null || response.body.isEmpty
             ? response.reasonPhrase
@@ -155,9 +165,11 @@ class JenkinsClient with LoggerMixin {
 
     return _handleResponse<JenkinsJob>(
       _client.get(fullUrl, headers: headers),
-      (Map<String, dynamic> json) => InteractionResult.success(
-        result: JenkinsJob.fromJson(json),
-      ),
+      (Map<String, dynamic> json, _) {
+        return InteractionResult.success(
+          result: JenkinsJob.fromJson(json),
+        );
+      },
     );
   }
 
@@ -215,7 +227,7 @@ class JenkinsClient with LoggerMixin {
 
     return _handleResponse<List<JenkinsJob>>(
       _client.get(url, headers: headers),
-      (Map<String, dynamic> json) {
+      (Map<String, dynamic> json, _) {
         final list = json == null ? null : json['jobs'] as List<dynamic>;
         return InteractionResult.success(
           result: JenkinsJob.listFromJson(list),
@@ -272,7 +284,7 @@ class JenkinsClient with LoggerMixin {
 
     return _handleResponse<JenkinsBuild>(
       _client.get(buildUrl, headers: headers),
-      (Map<String, dynamic> json) {
+      (Map<String, dynamic> json, _) {
         return InteractionResult.success(
           result: JenkinsBuildDeserializer.fromJson(json),
         );
@@ -289,7 +301,7 @@ class JenkinsClient with LoggerMixin {
 
     return _handleResponse<JenkinsBuildingJob>(
       _client.get(url, headers: headers),
-      (Map<String, dynamic> json) {
+      (Map<String, dynamic> json, _) {
         final builds = json['builds'] as List<dynamic>;
         json['builds'] = builds?.reversed?.toList();
 
@@ -319,7 +331,7 @@ class JenkinsClient with LoggerMixin {
 
     return _handleResponse<List<JenkinsBuildArtifact>>(
       _client.get(url, headers: headers),
-      (Map<String, dynamic> json) => InteractionResult.success(
+      (Map<String, dynamic> json, _) => InteractionResult.success(
         result: JenkinsBuildArtifact.listFromJson(
           json['artifacts'] as List<dynamic>,
         ),
@@ -361,7 +373,67 @@ class JenkinsClient with LoggerMixin {
 
     return _handleResponse<Map<String, dynamic>>(
       _client.get(url, headers: headers),
-      (Map<String, dynamic> json) => InteractionResult.success(result: json),
+      (Map<String, dynamic> json, _) {
+        return InteractionResult.success(result: json);
+      },
+    );
+  }
+
+  /// Fetches the [JenkinsInstanceInfo] by the given [jenkinsUrl].
+  ///
+  /// Throws an [ArgumentError] if the given [jenkinsUrl] is `null`.
+  ///
+  /// Returns [InteractionResult.error] if the given [jenkinsUrl] is not found
+  /// or does not exist.
+  Future<InteractionResult<JenkinsInstanceInfo>> fetchJenkinsInstanceInfo(
+    String jenkinsUrl,
+  ) async {
+    ArgumentError.checkNotNull(jenkinsUrl, 'jenkinsUrl');
+
+    logger.info('Fetching Jenkins instance info from the url: $jenkinsUrl');
+
+    final url = '$jenkinsUrl/login';
+
+    try {
+      return _handleResponse(
+        _client.get(url, headers: headers),
+        (_, headers) {
+          final jenkinsInstanceInfo = JenkinsInstanceInfo.fromMap(headers);
+
+          return InteractionResult.success(result: jenkinsInstanceInfo);
+        },
+      );
+    } on SocketException {
+      return InteractionResult.error(
+        message: 'The given URL ($jenkinsUrl) does not exist.',
+      );
+    }
+  }
+
+  /// Fetches the [JenkinsUser] using the given [auth].
+  ///
+  /// Throws an [ArgumentError] if the given [auth] is `null`.
+  Future<InteractionResult<JenkinsUser>> fetchJenkinsUser(
+    AuthorizationBase auth,
+  ) async {
+    ArgumentError.checkNotNull(auth, 'auth');
+
+    logger.info('Fetching Jenkins user info from the url: $jenkinsUrl');
+
+    final url = _jenkinsUrlBuilder.build(jenkinsUrl, path: 'me');
+
+    final requestHeaders = {
+      ...headers,
+      ...auth.toMap(),
+    };
+
+    return _handleResponse(
+      _client.get(url, headers: requestHeaders),
+      (json, _) {
+        final jenkinsUser = JenkinsUser.fromJson(json);
+
+        return InteractionResult.success(result: jenkinsUser);
+      },
     );
   }
 
