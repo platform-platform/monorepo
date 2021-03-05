@@ -5,20 +5,23 @@ import 'package:equatable/equatable.dart';
 
 /// A class that represents a Jenkins user.
 class JenkinsUser extends Equatable {
-  /// A unique identifier of this user.
-  final String id;
+  /// A name of this user.
+  final String name;
 
-  /// A full name of this user.
-  final String fullName;
+  /// A flag that indicates whether the user is authenicated or not.
+  final bool authenticated;
+
+  /// A flag that indicates whether the user is anonymous or not.
+  final bool anonymous;
 
   @override
-  List<Object> get props => [id, fullName];
+  List<Object> get props => [name, authenticated, anonymous];
 
-  /// Creates a new instance of the [JenkinsUser] with the given [id]
-  /// and [fullName].
+  /// Creates a new instance of the [JenkinsUser] with the given parameters.
   const JenkinsUser({
-    this.id,
-    this.fullName,
+    this.name,
+    this.anonymous,
+    this.authenticated,
   });
 
   /// Creates a new instance of the [JenkinsUser] from the decoded JSON
@@ -29,8 +32,9 @@ class JenkinsUser extends Equatable {
     if (json == null) return null;
 
     return JenkinsUser(
-      id: json['id'] as String,
-      fullName: json['fullName'] as String,
+      name: json['name'] as String,
+      anonymous: json['anonymous'] as bool,
+      authenticated: json['authenticated'] as bool,
     );
   }
 
@@ -47,8 +51,9 @@ class JenkinsUser extends Equatable {
   /// Converts this user instance into the JSON encodable [Map].
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'fullName': fullName,
+      'name': name,
+      'authenticated': authenticated,
+      'anonymous': anonymous,
     };
   }
 

@@ -305,8 +305,11 @@ class JenkinsMockServer extends ApiMockServer {
 
   /// Responses with the [JenkinsUser] for the given [request].
   Future<void> _jenkinsUserResponse(HttpRequest request) async {
-    print('here');
-    const jenkinsUser = JenkinsUser(id: '1', fullName: 'name');
+    const jenkinsUser = JenkinsUser(
+      name: 'name',
+      authenticated: true,
+      anonymous: true,
+    );
 
     final responseBody = jenkinsUser.toJson();
 

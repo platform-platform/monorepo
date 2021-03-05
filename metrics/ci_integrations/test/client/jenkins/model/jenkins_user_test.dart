@@ -6,23 +6,34 @@ import 'package:test/test.dart';
 
 void main() {
   group("JenkinsUser", () {
-    const id = "id";
-    const fullName = "Full Name";
+    const name = "name";
+    const authenticated = true;
+    const anonymous = true;
 
     const userJson = {
-      'id': id,
-      'fullName': fullName,
+      'name': name,
+      'authenticated': authenticated,
+      'anonymous': anonymous,
     };
 
-    const user = JenkinsUser(id: id, fullName: fullName);
+    const user = JenkinsUser(
+      name: name,
+      authenticated: authenticated,
+      anonymous: anonymous,
+    );
 
     test(
       "creates an instance with the given parameters",
       () {
-        const user = JenkinsUser(id: id, fullName: fullName);
+        const user = JenkinsUser(
+          name: name,
+          authenticated: authenticated,
+          anonymous: anonymous,
+        );
 
-        expect(user.fullName, equals(fullName));
-        expect(user.id, equals(id));
+        expect(user.name, equals(name));
+        expect(user.authenticated, equals(authenticated));
+        expect(user.anonymous, equals(anonymous));
       },
     );
 
@@ -66,12 +77,14 @@ void main() {
       ".listFromJson() creates a list of Jenkins users from the given list of JSON encodable objects",
       () {
         const anotherJson = {
-          'id': '',
-          'fullName': '',
+          'name': '',
+          'authenticated': true,
+          'anonymous': true,
         };
         const anotherUser = JenkinsUser(
-          id: '',
-          fullName: '',
+          name: '',
+          authenticated: true,
+          anonymous: true,
         );
         const jsonList = [userJson, anotherJson];
         const expectedList = [user, anotherUser];
