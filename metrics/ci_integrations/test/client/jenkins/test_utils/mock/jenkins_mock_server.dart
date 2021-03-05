@@ -95,7 +95,7 @@ class JenkinsMockServer extends ApiMockServer {
         ),
         RequestHandler.get(
           pathMatcher: ExactPathMatcher(
-            '/me${JenkinsConstants.jsonApiPath}',
+            '/whoAmI${JenkinsConstants.jsonApiPath}',
           ),
           dispatcher: _jenkinsUserResponse,
         ),

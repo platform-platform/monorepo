@@ -420,7 +420,7 @@ class JenkinsClient with LoggerMixin {
 
     logger.info('Fetching Jenkins user info from the url: $jenkinsUrl');
 
-    final url = _jenkinsUrlBuilder.build(jenkinsUrl, path: 'me');
+    final url = _jenkinsUrlBuilder.build(jenkinsUrl, path: 'whoAmI');
 
     final requestHeaders = {
       ...headers,
