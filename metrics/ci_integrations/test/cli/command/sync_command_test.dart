@@ -418,6 +418,9 @@ class _FirestoreDestinationPartyStub implements FirestoreDestinationParty {
   ConfigValidatorFactoryStub<FirestoreDestinationConfig>
       get configValidatorFactory => null;
 
+  @override
+  bool acceptsConfig(Map<String, dynamic> config) => null;
+
   /// Creates this stub class with the given [firebaseAuth] that is used to create
   /// [FirestoreDestinationClientFactory] allowing to mock authentication related
   /// functionality.

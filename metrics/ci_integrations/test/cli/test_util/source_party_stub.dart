@@ -19,4 +19,7 @@ class SourcePartyStub implements SourceParty {
 
   @override
   ConfigValidatorFactory<SourceConfig> get configValidatorFactory => null;
+
+  @override
+  bool acceptsConfig(Map<String, dynamic> config) => null;
 }

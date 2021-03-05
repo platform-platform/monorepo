@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:async';
@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
-import 'package:ci_integration/client/github_actions/github_actions_client.dart';
 import 'package:ci_integration/client/github_actions/models/github_action_conclusion.dart';
 import 'package:ci_integration/client/github_actions/models/workflow_run.dart';
 import 'package:ci_integration/client/github_actions/models/workflow_run_artifact.dart';
@@ -22,6 +21,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_utils/extensions/interaction_result_answer.dart';
+import '../test_utils/github_actions_client_mock.dart';
 import '../test_utils/test_data/github_actions_test_data_generator.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -43,7 +43,7 @@ void main() {
 
     final archiveHelperMock = _ArchiveHelperMock();
     final archiveMock = _ArchiveMock();
-    final githubActionsClientMock = _GithubActionsClientMock();
+    final githubActionsClientMock = GithubActionsClientMock();
     final adapter = GithubActionsSourceClientAdapter(
       githubActionsClient: githubActionsClientMock,
       archiveHelper: archiveHelperMock,
@@ -1180,8 +1180,6 @@ void main() {
     );
   });
 }
-
-class _GithubActionsClientMock extends Mock implements GithubActionsClient {}
 
 class _ArchiveHelperMock extends Mock implements ArchiveHelper {}
 

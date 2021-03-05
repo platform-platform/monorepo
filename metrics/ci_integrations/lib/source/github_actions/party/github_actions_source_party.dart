@@ -10,10 +10,8 @@ import 'package:ci_integration/source/github_actions/config/model/github_actions
 import 'package:ci_integration/source/github_actions/config/parser/github_actions_source_config_parser.dart';
 
 /// An integration party for the Github Actions source integration.
-class GithubActionsSourceParty
-    implements
-        SourceParty<GithubActionsSourceConfig,
-            GithubActionsSourceClientAdapter> {
+class GithubActionsSourceParty extends SourceParty<GithubActionsSourceConfig,
+    GithubActionsSourceClientAdapter> {
   @override
   final GithubActionsSourceClientFactory clientFactory =
       const GithubActionsSourceClientFactory();

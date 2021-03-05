@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:io';
@@ -7,11 +7,13 @@ import 'package:ci_integration/cli/logger/writer/io_logger_writer.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_utils/mock/io_sink_mock.dart';
+
 // ignore_for_file: avoid_redundant_argument_values
 
 void main() {
   group("IOLoggerWriter", () {
-    final messageSinkMock = _IOSinkMock();
+    final messageSinkMock = IOSinkMock();
     final writer = IOLoggerWriter(
       messageSink: messageSinkMock,
     );
@@ -48,5 +50,3 @@ void main() {
     });
   });
 }
-
-class _IOSinkMock extends Mock implements IOSink {}

@@ -19,4 +19,7 @@ class DestinationPartyStub implements DestinationParty {
 
   @override
   ConfigValidatorFactory<DestinationConfig> get configValidatorFactory => null;
+
+  @override
+  bool acceptsConfig(Map<String, dynamic> config) => null;
 }
