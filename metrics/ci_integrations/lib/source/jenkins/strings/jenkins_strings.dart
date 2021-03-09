@@ -15,4 +15,8 @@ class JenkinsStrings {
       'The user with these authorization credentials is an anonymous user.';
   static const String unAuthenticatedUser =
       'The user with these authorization credentials is not authenticated.';
+  static const String jenkinsUrlInvalidInterruptReason =
+      "Can't be validated as the provided Jenkins URL is invalid.";
+  static const String authInvalidInterruptReason =
+      "Can't be validated as the provided authentication credentials are invalid.";
 }
