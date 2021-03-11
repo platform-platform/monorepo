@@ -23,8 +23,8 @@ void main() {
       () {
         final expectedConfigFields = [
           GithubActionsSourceConfigField.accessToken,
-          GithubActionsSourceConfigField.repositoryName,
           GithubActionsSourceConfigField.repositoryOwner,
+          GithubActionsSourceConfigField.repositoryName,
           GithubActionsSourceConfigField.workflowIdentifier,
           GithubActionsSourceConfigField.jobName,
           GithubActionsSourceConfigField.coverageArtifactName,

@@ -19,8 +19,8 @@ class GithubActionsSourceValidator
   @override
   final ValidationResultBuilder validationResultBuilder;
 
-  /// Creates a new instance of the [GithubActionsSourceValidator] with the
-  /// given [validationDelegate] and [validationResultBuilder].
+  /// Creates a new instance of the [GithubActionsSourceValidator]
+  /// with the given [validationDelegate] and [validationResultBuilder].
   ///
   /// Throws an [ArgumentError] if the given [validationDelegate]
   /// or [validationResultBuilder] is `null`.
@@ -40,14 +40,14 @@ class GithubActionsSourceValidator
     final accessToken = config.accessToken;
     final auth = BearerAuthorization(accessToken);
 
-    final validateAuthInteraction = await validationDelegate.validateAuth(auth);
+    final authInteraction = await validationDelegate.validateAuth(auth);
 
     _processInteraction(
-      interaction: validateAuthInteraction,
+      interaction: authInteraction,
       field: GithubActionsSourceConfigField.accessToken,
     );
 
-    if (validateAuthInteraction.isError) {
+    if (authInteraction.isError) {
       return _finalizeValidationResult(
         GithubActionsStrings.tokenInvalidInterruptReason,
       );
@@ -138,8 +138,8 @@ class GithubActionsSourceValidator
     return FieldValidationResult.success(additionalContext);
   }
 
-  /// Sets the empty results of the [validationResultBuilder] using the given
-  /// [interruptReason] and builds the [ValidationResult]
+  /// Sets the empty results of the [validationResultBuilder] using
+  /// the given [interruptReason] and builds the [ValidationResult]
   /// using the [validationResultBuilder].
   ValidationResult _finalizeValidationResult(String interruptReason) {
     _setEmptyFields(interruptReason);

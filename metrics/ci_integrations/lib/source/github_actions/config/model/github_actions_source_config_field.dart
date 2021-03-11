@@ -44,8 +44,8 @@ class GithubActionsSourceConfigField extends ConfigField {
     coverageArtifactName,
   ]);
 
-  /// Creates an instance of the [GithubActionsSourceConfigField] with the
-  /// given value.
+  /// Creates an instance of the [GithubActionsSourceConfigField]
+  /// with the given value.
   ///
   /// Throws an [ArgumentError] if the given [value] is `null`.
   GithubActionsSourceConfigField._(

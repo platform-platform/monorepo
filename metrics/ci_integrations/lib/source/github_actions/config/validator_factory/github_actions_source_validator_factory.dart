@@ -12,7 +12,8 @@ import 'package:ci_integration/source/github_actions/config/validation_delegate/
 import 'package:ci_integration/source/github_actions/config/validator/github_actions_source_validator.dart';
 import 'package:ci_integration/util/authorization/authorization.dart';
 
-/// A factory class that provides a method for creating [GithubActionsSourceValidator].
+/// A factory class that provides a method
+/// for creating [GithubActionsSourceValidator].
 class GithubActionsSourceValidatorFactory
     implements ConfigValidatorFactory<GithubActionsSourceConfig> {
   /// Creates a new instance of the [GithubActionsSourceValidatorFactory].

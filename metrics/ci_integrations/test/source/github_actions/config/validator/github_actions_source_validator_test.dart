@@ -29,12 +29,12 @@ void main() {
     const message = 'message';
 
     final config = GithubActionsSourceConfig(
+      accessToken: accessToken,
       repositoryOwner: repositoryOwner,
       repositoryName: repositoryName,
       workflowIdentifier: workflowId,
       jobName: jobName,
       coverageArtifactName: coverageArtifactName,
-      accessToken: accessToken,
     );
 
     final auth = BearerAuthorization(accessToken);
@@ -434,7 +434,7 @@ void main() {
     );
 
     test(
-      ".validate() delegates validate workflow id validation to the validation delegate",
+      ".validate() delegates validate workflow identifier validation to the validation delegate",
       () async {
         whenValidateWorkflowId().thenErrorWith();
 
