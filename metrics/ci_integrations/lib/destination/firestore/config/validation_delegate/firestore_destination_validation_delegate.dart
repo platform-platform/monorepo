@@ -1,40 +1,27 @@
 // Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
-// Use of this source code is governed by the Apache License, Version 2.0
-// that can be found in the LICENSE file.
-
 import 'package:ci_integration/client/firestore/firestore.dart' as fs;
 import 'package:ci_integration/client/firestore/mappers/firebase_auth_exception_code_mapper.dart';
 import 'package:ci_integration/client/firestore/model/firebase_auth_exception_code.dart';
+import 'package:ci_integration/destination/firestore/config/factory/firebase_auth_factory.dart';
+import 'package:ci_integration/destination/firestore/config/factory/firestore_factory.dart';
 import 'package:ci_integration/integration/interface/base/config/validation_delegate/validation_delegate.dart';
 import 'package:ci_integration/util/model/interaction_result.dart';
 import 'package:firedart/firedart.dart';
-import 'package:firedart/src/auth/exception/firebase_auth_exception.dart';
 
 /// A [ValidationDelegate] for the Firestore destination integration.
 class FirestoreDestinationValidationDelegate implements ValidationDelegate {
-  /// A [FirebaseAuth] instance to work with the Firebase Auth services.
-  final FirebaseAuth _firebaseAuth;
-
-  /// A [Firestore] client to work with the Cloud Firestore services.
-  final fs.Firestore _firestore;
-
-  /// Creates an instance of the [FirestoreDestinationValidationDelegate].
-  ///
-  /// Throws an [ArgumentError] if the given [fs.Firestore] or [_firebaseAuth]
-  /// are `null`.
-  FirestoreDestinationValidationDelegate(this._firestore, this._firebaseAuth) {
-    ArgumentError.checkNotNull(_firestore);
-    ArgumentError.checkNotNull(_firebaseAuth);
-  }
+  /// Creates a new instance of the [FirestoreDestinationValidationDelegate].
+  FirestoreDestinationValidationDelegate();
 
   /// Validates the given [apiKey].
-  Future<InteractionResult<void>> validatePublicApiKey(String apiKey) async {
+  Future<InteractionResult<void>> validatePublicApiKey(
+    FirebaseAuthFactory authFactory,
+    String firebaseApiKey,
+  ) async {
     try {
-      await _firebaseAuth.signIn('email@email.com', '123456');
-
-      return const InteractionResult.success();
+      authFactory.create(firebaseApiKey);
     } on FirebaseAuthException catch (e) {
       final exceptionCode = e.code;
 
@@ -42,19 +29,49 @@ class FirestoreDestinationValidationDelegate implements ValidationDelegate {
       final code = mapper.map(exceptionCode);
 
       if (code == FirebaseAuthExceptionCode.invalidApiKey) {
-        return const InteractionResult.error();
+        return const InteractionResult.error(
+          message: 'The Firebase API key is not valid.',
+        );
       }
-
-      return const InteractionResult.success();
     }
+
+    return const InteractionResult.success();
   }
 
   /// Validates the given [email] and [password].
   Future<InteractionResult<void>> validateAuth(
-    String apiKey,
+    FirebaseAuthFactory authFactory,
+    String firebaseApiKey,
     String email,
     String password,
   ) async {
+    try {
+      authFactory.createAndAuthenticate(
+        firebaseApiKey,
+        email,
+        password,
+      );
+    } on FirebaseAuthException catch (e) {
+      final exceptionCode = e.code;
+
+      const mapper = FirebaseAuthExceptionCodeMapper();
+      final code = mapper.map(exceptionCode);
+
+      if (code == FirebaseAuthExceptionCode.emailNotFound) {
+        return const InteractionResult.error(
+          message: 'The email is not found.',
+        );
+      } else if (code == FirebaseAuthExceptionCode.invalidPassword) {
+        return const InteractionResult.error(
+          message: 'The password is not valid.',
+        );
+      } else if (code == FirebaseAuthExceptionCode.passwordLoginDisabled) {
+        return const InteractionResult.error(
+          message: 'The login via password is disabled.',
+        );
+      }
+    }
+
     return const InteractionResult.success();
   }
 
