@@ -14,6 +14,15 @@ class FieldValidationResult extends Equatable {
   /// result.
   final String additionalContext;
 
+  /// Indicates if the field validation has finished with an error.
+  bool get isFailure => conclusion == FieldValidationConclusion.invalid;
+
+  /// Indicates if the field validation has finished successfully.
+  bool get isSuccess => conclusion == FieldValidationConclusion.valid;
+
+  /// Indicates if the field validation result is unknown.
+  bool get isUnknown => conclusion == FieldValidationConclusion.unknown;
+
   @override
   List<Object> get props => [conclusion, additionalContext];
 

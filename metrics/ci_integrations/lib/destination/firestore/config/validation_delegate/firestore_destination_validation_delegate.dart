@@ -29,6 +29,9 @@ class FirestoreDestinationValidationDelegate implements ValidationDelegate {
 
   /// Creates a new instance of the [FirestoreDestinationValidationDelegate]
   /// with the given [authFactory].
+  ///
+  /// Throws an [ArgumentError] if the given [authFactory] or [firestoreFactory]
+  /// is `null`.
   FirestoreDestinationValidationDelegate(
     this.authFactory,
     this.firestoreFactory,

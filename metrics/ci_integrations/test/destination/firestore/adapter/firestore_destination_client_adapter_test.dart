@@ -1,7 +1,6 @@
 // Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
-import 'package:ci_integration/client/firestore/firestore.dart' as client;
 import 'package:ci_integration/data/deserializer/build_data_deserializer.dart';
 import 'package:ci_integration/destination/error/destination_error.dart';
 import 'package:ci_integration/destination/firestore/adapter/firestore_destination_client_adapter.dart';
@@ -10,6 +9,11 @@ import 'package:grpc/grpc.dart';
 import 'package:metrics_core/metrics_core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import '../test_utils/test_data/collection_reference_mock.dart';
+import '../test_utils/test_data/document_mock.dart';
+import '../test_utils/test_data/document_reference_mock.dart';
+import '../test_utils/test_data/firestore_mock.dart';
 
 // ignore_for_file: avoid_implementing_value_types
 
@@ -34,10 +38,10 @@ void main() {
       BuildData(buildNumber: 1),
       BuildData(buildNumber: 2),
     ];
-    final _firestoreMock = _FirestoreMock();
-    final _collectionReferenceMock = _CollectionReferenceMock();
-    final _documentReferenceMock = _DocumentReferenceMock();
-    final _documentMock = _DocumentMock();
+    final _firestoreMock = FirestoreMock();
+    final _collectionReferenceMock = CollectionReferenceMock();
+    final _documentReferenceMock = DocumentReferenceMock();
+    final _documentMock = DocumentMock();
     final adapter = FirestoreDestinationClientAdapter(_firestoreMock);
     final grpcError = GrpcError.cancelled();
 
@@ -269,13 +273,3 @@ void main() {
     );
   });
 }
-
-class _FirestoreMock extends Mock implements client.Firestore {}
-
-// ignore: must_be_immutable
-class _CollectionReferenceMock extends Mock implements CollectionReference {}
-
-// ignore: must_be_immutable
-class _DocumentReferenceMock extends Mock implements DocumentReference {}
-
-class _DocumentMock extends Mock implements Document {}
