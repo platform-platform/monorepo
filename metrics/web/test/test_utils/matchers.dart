@@ -14,7 +14,7 @@ final Matcher throwsAssertionError = throwsA(isA<AssertionError>());
 final Matcher throwsAuthenticationException =
     throwsA(isA<AuthenticationException>());
 
-/// A matcher that can be used to verify that the value is equal `1`.
+/// A matcher that can be used to verify that the value is equal to `1`.
 final Matcher once = equals(1);
 
 /// A matcher that can be used to match named routes in test cases.
