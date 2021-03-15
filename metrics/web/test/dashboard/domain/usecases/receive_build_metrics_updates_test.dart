@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/dashboard/domain/entities/collections/date_time_set.dart';
@@ -75,7 +75,7 @@ void main() {
           any,
           DateTime.now().subtract(expectedLoadingPeriod).date,
         ),
-      ).called(equals(1));
+      ).called(once);
     });
 
     test("subscribes to number of builds to load for chart metrics", () {
@@ -95,7 +95,7 @@ void main() {
 
       verify(
         repository.latestProjectBuildsStream(any, expectedBuildsToLoad),
-      ).called(equals(1));
+      ).called(once);
     });
 
     test("subscribes to last successful build", () {
@@ -115,7 +115,7 @@ void main() {
 
       verify(
         repository.lastSuccessfulBuildStream(any),
-      ).called(equals(1));
+      ).called(once);
     });
 
     test(

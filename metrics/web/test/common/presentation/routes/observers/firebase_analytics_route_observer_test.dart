@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ void main() {
 
       observer.didPush(route, null);
 
-      verify(analyticsNotifier.logPageView(routeSettings.name)).called(1);
+      verify(analyticsNotifier.logPageView(routeSettings.name)).called(once);
     });
 
     test(".didReplace() logs a new route name", () {
@@ -83,7 +83,7 @@ void main() {
 
       observer.didReplace(newRoute: route);
 
-      verify(analyticsNotifier.logPageView(routeSettings.name)).called(1);
+      verify(analyticsNotifier.logPageView(routeSettings.name)).called(once);
     });
 
     test(".didPop() logs the previous route name as a new one", () {
@@ -94,7 +94,7 @@ void main() {
 
       observer.didPop(null, route);
 
-      verify(analyticsNotifier.logPageView(routeSettings.name)).called(1);
+      verify(analyticsNotifier.logPageView(routeSettings.name)).called(once);
     });
   });
 }

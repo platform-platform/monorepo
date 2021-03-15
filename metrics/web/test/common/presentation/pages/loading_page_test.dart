@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
@@ -17,6 +17,7 @@ import 'package:mockito/mockito.dart';
 import '../../../test_utils/auth_notifier_mock.dart';
 import '../../../test_utils/debug_menu_notifier_mock.dart';
 import '../../../test_utils/feature_config_notifier_mock.dart';
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/navigation_notifier_mock.dart';
 import '../../../test_utils/router_delegate_stub.dart';
 import '../../../test_utils/test_injection_container.dart';
@@ -59,8 +60,7 @@ void main() {
           authNotifier: authNotifier,
         ));
 
-        verify(authNotifier.subscribeToAuthenticationUpdates())
-            .called(equals(1));
+        verify(authNotifier.subscribeToAuthenticationUpdates()).called(once);
       },
     );
 
@@ -71,7 +71,7 @@ void main() {
           featureConfigNotifier: featureConfigNotifier,
         ));
 
-        verify(featureConfigNotifier.initializeConfig()).called(equals(1));
+        verify(featureConfigNotifier.initializeConfig()).called(once);
       },
     );
 
@@ -91,7 +91,7 @@ void main() {
 
         featureConfigNotifier.notifyListeners();
 
-        verify(debugMenuNotifier.initializeLocalConfig()).called(1);
+        verify(debugMenuNotifier.initializeLocalConfig()).called(once);
         verifyNever(debugMenuNotifier.initializeDefaults());
       },
     );
@@ -112,7 +112,7 @@ void main() {
 
         featureConfigNotifier.notifyListeners();
 
-        verify(debugMenuNotifier.initializeDefaults()).called(1);
+        verify(debugMenuNotifier.initializeDefaults()).called(once);
         verifyNever(debugMenuNotifier.initializeLocalConfig());
       },
     );
@@ -152,7 +152,7 @@ void main() {
 
         verify(navigationNotifier.handleAppInitialized(
           isAppInitialized: anyNamed('isAppInitialized'),
-        )).called(equals(1));
+        )).called(once);
       },
     );
 
@@ -197,7 +197,7 @@ void main() {
             equals(configuration.path),
             named: 'path',
           ),
-        )).called(equals(1));
+        )).called(once);
       },
     );
 
@@ -424,7 +424,7 @@ void main() {
 
         verify(navigationNotifier.handleAppInitialized(
           isAppInitialized: anyNamed('isAppInitialized'),
-        )).called(equals(1));
+        )).called(once);
       },
     );
 
@@ -473,7 +473,7 @@ void main() {
             equals(configuration.path),
             named: 'path',
           ),
-        )).called(equals(1));
+        )).called(once);
       },
     );
   });

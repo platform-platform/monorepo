@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/metrics_logger/sentry/event_processors/sentry_event_processor.dart';
@@ -6,6 +6,8 @@ import 'package:metrics/metrics_logger/sentry/writers/sentry_writer.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sentry/sentry.dart';
 import 'package:test/test.dart';
+
+import '../../../test_utils/matchers.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 
@@ -100,7 +102,7 @@ void main() {
           stackTrace: argThat(isNull, named: 'stackTrace'),
           hint: argThat(isNull, named: 'hint'),
           scope: anyNamed('scope'),
-        )).called(1);
+        )).called(once);
       },
     );
 
@@ -116,7 +118,7 @@ void main() {
           stackTrace: argThat(isNull, named: 'stackTrace'),
           hint: argThat(isNull, named: 'hint'),
           scope: anyNamed('scope'),
-        )).called(1);
+        )).called(once);
       },
     );
 
@@ -133,7 +135,7 @@ void main() {
           stackTrace: stackTrace,
           hint: argThat(isNull, named: 'hint'),
           scope: anyNamed('scope'),
-        )).called(1);
+        )).called(once);
       },
     );
 
@@ -156,7 +158,7 @@ void main() {
             predicate<Scope>((scope) => scope.contexts[key] == value),
             named: 'scope',
           ),
-        )).called(1);
+        )).called(once);
       },
     );
 
@@ -182,7 +184,7 @@ void main() {
             argThat(sentryEventMatcher),
             hint: anyNamed('hint'),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
   });

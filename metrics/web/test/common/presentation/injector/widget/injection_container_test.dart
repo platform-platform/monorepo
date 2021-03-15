@@ -17,6 +17,7 @@ import 'package:metrics/project_groups/presentation/state/project_groups_notifie
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../test_utils/matchers.dart';
 import '../../../../test_utils/metrics_config_stub.dart';
 
 void main() {
@@ -62,7 +63,7 @@ void main() {
         ));
 
         expect(tester.takeException(), isNull);
-        verify(configMock.googleSignInClientId).called(1);
+        verify(configMock.googleSignInClientId).called(once);
       },
     );
 

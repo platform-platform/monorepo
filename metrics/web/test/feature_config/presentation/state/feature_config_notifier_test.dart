@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/feature_config/domain/entities/feature_config.dart';
@@ -98,7 +98,7 @@ void main() {
 
         notifier.initializeConfig();
 
-        verify(_fetchFeatureConfigUseCase(param)).called(1);
+        verify(_fetchFeatureConfigUseCase(param)).called(once);
         expect(notifier.isLoading, isTrue);
       },
     );
@@ -118,7 +118,7 @@ void main() {
 
         await notifier.initializeConfig();
 
-        verify(_fetchFeatureConfigUseCase(param)).called(1);
+        verify(_fetchFeatureConfigUseCase(param)).called(once);
         expect(notifier.isLoading, isFalse);
       },
     );
@@ -138,7 +138,7 @@ void main() {
 
         notifier.initializeConfig();
 
-        verify(_fetchFeatureConfigUseCase(param)).called(1);
+        verify(_fetchFeatureConfigUseCase(param)).called(once);
       },
     );
 
@@ -159,7 +159,7 @@ void main() {
         );
         notifier.initializeConfig();
 
-        verify(_fetchFeatureConfigUseCase(featureConfigParam)).called(1);
+        verify(_fetchFeatureConfigUseCase(featureConfigParam)).called(once);
       },
     );
 

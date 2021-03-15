@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +8,8 @@ import 'package:metrics/feature_config/domain/usecases/fetch_feature_config_usec
 import 'package:metrics/feature_config/domain/usecases/parameters/feature_config_param.dart';
 
 import 'package:mockito/mockito.dart';
+
+import '../../../test_utils/matchers.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 
@@ -54,7 +56,7 @@ void main() {
       () {
         useCase(param);
 
-        verify(repository.fetch()).called(1);
+        verify(repository.fetch()).called(once);
       },
     );
 

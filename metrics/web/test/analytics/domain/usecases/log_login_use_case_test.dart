@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/analytics/domain/usecases/log_login_use_case.dart';
@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_utils/analytics_repository_mock.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("LogLoginUseCase", () {
@@ -31,7 +32,7 @@ void main() {
 
       await logLoginUseCase(userIdParam);
 
-      verify(repository.setUserId(id)).called(equals(1));
+      verify(repository.setUserId(id)).called(once);
     });
 
     test("logs user logins", () async {
@@ -39,7 +40,7 @@ void main() {
 
       await logLoginUseCase(userIdParam);
 
-      verify(repository.logLogin()).called(equals(1));
+      verify(repository.logLogin()).called(once);
     });
   });
 }

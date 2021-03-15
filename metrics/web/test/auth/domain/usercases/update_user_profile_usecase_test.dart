@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/auth/domain/entities/theme_type.dart';
@@ -7,6 +7,7 @@ import 'package:metrics/auth/domain/usecases/update_user_profile_usecase.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/user_repository_mock.dart';
 
 void main() {
@@ -35,7 +36,7 @@ void main() {
 
       updateProfile(userProfileParam);
 
-      verify(repository.updateUserProfile(id, selectedTheme)).called(equals(1));
+      verify(repository.updateUserProfile(id, selectedTheme)).called(once);
     });
 
     test("throws if the given repository throws during updating profile", () {

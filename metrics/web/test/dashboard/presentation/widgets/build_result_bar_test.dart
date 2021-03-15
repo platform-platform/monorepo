@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/gestures.dart';
@@ -25,6 +25,7 @@ import 'package:network_image_mock/network_image_mock.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/metrics_themed_testbed.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -265,7 +266,7 @@ void main() {
           enableDomStorage: anyNamed('enableDomStorage'),
           universalLinksOnly: anyNamed('universalLinksOnly'),
           headers: anyNamed('headers'),
-        )).called(1);
+        )).called(once);
       },
     );
 

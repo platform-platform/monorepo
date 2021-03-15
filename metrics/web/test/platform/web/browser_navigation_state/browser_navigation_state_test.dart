@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/platform/web/browser_navigation_state/browser_navigation_state.dart';
@@ -27,7 +27,7 @@ void main() {
 
       navigationState.replaceState(data, title, path);
 
-      verify(history.replaceState(data, title, path)).called(equals(1));
+      verify(history.replaceState(data, title, path)).called(once);
     });
   });
 }

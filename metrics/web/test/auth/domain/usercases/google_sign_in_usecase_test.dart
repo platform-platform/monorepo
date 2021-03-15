@@ -80,7 +80,7 @@ void main() {
 
         await signInUseCase();
 
-        verify(repository.getGoogleSignInCredentials()).called(equals(1));
+        verify(repository.getGoogleSignInCredentials()).called(once);
       },
     );
 
@@ -93,7 +93,7 @@ void main() {
 
       await signInUseCase();
 
-      verify(repository.validateEmailDomain(any)).called(equals(1));
+      verify(repository.validateEmailDomain(any)).called(once);
     });
 
     test("throws if an email domain is not valid", () async {
@@ -136,7 +136,7 @@ void main() {
         signInUseCase(),
         throwsAuthenticationException,
       );
-      verify(repository.signOut()).called(equals(1));
+      verify(repository.signOut()).called(once);
     });
 
     test(
@@ -150,7 +150,7 @@ void main() {
 
         await signInUseCase();
 
-        verify(repository.signInWithGoogle(any)).called(equals(1));
+        verify(repository.signInWithGoogle(any)).called(once);
       },
     );
 

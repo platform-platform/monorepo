@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter_test/flutter_test.dart';
@@ -6,6 +6,7 @@ import 'package:metrics/debug_menu/domain/usecases/open_local_config_storage_use
 import 'package:mockito/mockito.dart';
 
 import '../../../test_utils/local_config_repository_mock.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("OpenLocalConfigStorageUseCase", () {
@@ -42,7 +43,7 @@ void main() {
 
         useCase();
 
-        verify(repository.open()).called(1);
+        verify(repository.open()).called(once);
       },
     );
   });

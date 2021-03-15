@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +8,7 @@ import 'package:metrics/debug_menu/domain/usecases/update_local_config_usecase.d
 import 'package:mockito/mockito.dart';
 
 import '../../../test_utils/local_config_repository_mock.dart';
+import '../../../test_utils/matchers.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 
@@ -52,7 +53,7 @@ void main() {
 
         verify(
           repository.updateConfig(isFpsMonitorEnabled: isFpsMonitorEnabled),
-        ).called(1);
+        ).called(once);
       },
     );
 

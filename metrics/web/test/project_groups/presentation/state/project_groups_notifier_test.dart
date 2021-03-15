@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:async';
@@ -526,7 +526,7 @@ void main() {
 
         projectGroupsNotifier.subscribeToProjectGroups();
 
-        verify(receiveProjectGroupUpdates()).called(equals(1));
+        verify(receiveProjectGroupUpdates()).called(once);
       },
     );
 
@@ -603,7 +603,7 @@ void main() {
 
         projectGroupsNotifier.subscribeToProjectGroups();
 
-        verify(receiveProjectGroupUpdates()).called(equals(1));
+        verify(receiveProjectGroupUpdates()).called(once);
       },
     );
 
@@ -646,7 +646,7 @@ void main() {
             projectGroupName: projectGroupName,
             projectIds: const [],
           )),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -731,7 +731,7 @@ void main() {
           updateProjectGroupUseCase(
             UpdateProjectGroupParam(projectGroupId, projectGroupName, const []),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -841,7 +841,7 @@ void main() {
           deleteProjectGroupUseCase(
             DeleteProjectGroupParam(projectGroupId: projectGroupId),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 

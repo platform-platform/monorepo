@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/metrics_logger/metrics_logger.dart';
@@ -60,7 +60,7 @@ void main() {
         final future = MetricsLogger.logError(error);
 
         expect(future, completes);
-        verify(writerMock.writeError(error)).called(1);
+        verify(writerMock.writeError(error)).called(once);
       },
     );
 
@@ -95,7 +95,7 @@ void main() {
       () async {
         await MetricsLogger.logError(error);
 
-        verify(writerMock.writeError(error)).called(1);
+        verify(writerMock.writeError(error)).called(once);
       },
     );
     test(
@@ -103,7 +103,7 @@ void main() {
       () async {
         await MetricsLogger.setContext(contextKey, contextValue);
 
-        verify(writerMock.setContext(contextKey, contextValue)).called(1);
+        verify(writerMock.setContext(contextKey, contextValue)).called(once);
       },
     );
   });

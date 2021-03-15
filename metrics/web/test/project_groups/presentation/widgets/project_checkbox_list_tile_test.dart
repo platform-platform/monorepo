@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
@@ -12,6 +12,7 @@ import 'package:metrics/project_groups/presentation/widgets/project_checkbox_lis
 import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/metrics_themed_testbed.dart';
 import '../../../test_utils/project_groups_notifier_mock.dart';
 import '../../../test_utils/test_injection_container.dart';
@@ -111,7 +112,7 @@ void main() {
           projectGroupsNotifierMock.toggleProjectCheckedStatus(
             projectCheckboxViewModel.id,
           ),
-        ).called(equals(1));
+        ).called(once);
       },
     );
 

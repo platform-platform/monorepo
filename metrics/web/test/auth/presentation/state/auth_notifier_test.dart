@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:async';
@@ -222,7 +222,7 @@ void main() {
 
         authNotifier.subscribeToAuthenticationUpdates();
 
-        verify(receiveAuthUpdates.call()).called(equals(1));
+        verify(receiveAuthUpdates.call()).called(once);
       },
     );
 
@@ -344,7 +344,7 @@ void main() {
 
         await untilCalled(signOutUseCase());
 
-        verify(signOutUseCase()).called(equals(1));
+        verify(signOutUseCase()).called(once);
       },
     );
 
@@ -522,7 +522,7 @@ void main() {
           password: Password(password),
         );
 
-        verify(signInUseCase(userCredentials)).called(equals(1));
+        verify(signInUseCase(userCredentials)).called(once);
       },
     );
 
@@ -551,7 +551,7 @@ void main() {
 
       await authNotifier.signInWithGoogle();
 
-      verify(googleSignInUseCase()).called(equals(1));
+      verify(googleSignInUseCase()).called(once);
     });
 
     test(".signInWithGoogle() does nothing if isLoading is true", () {
@@ -779,7 +779,7 @@ void main() {
       () async {
         await authNotifier.updateUserProfile(userProfileModel);
 
-        verify(updateUserProfileUseCase(any)).called(1);
+        verify(updateUserProfileUseCase(any)).called(once);
       },
     );
 
@@ -864,7 +864,7 @@ void main() {
     test(".signOut() delegates to the sign out use case", () async {
       await authNotifier.signOut();
 
-      verify(signOutUseCase()).called(equals(1));
+      verify(signOutUseCase()).called(once);
     });
 
     test(".signOut() cancels the user profile subscription", () async {

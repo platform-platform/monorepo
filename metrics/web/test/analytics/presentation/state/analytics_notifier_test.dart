@@ -71,7 +71,7 @@ void main() {
         await analyticsNotifier.logLogin(userId);
         await analyticsNotifier.logLogin(userId);
 
-        verify(logLoginUseCase(userParam)).called(1);
+        verify(logLoginUseCase(userParam)).called(once);
       },
     );
 
@@ -80,7 +80,7 @@ void main() {
       () async {
         await analyticsNotifier.logLogin(userId);
 
-        verify(logLoginUseCase(userParam)).called(1);
+        verify(logLoginUseCase(userParam)).called(once);
       },
     );
 
@@ -103,14 +103,14 @@ void main() {
 
         await analyticsNotifier.logPageView(pageName.value);
 
-        verify(logPageViewUseCase(pageParam)).called(1);
+        verify(logPageViewUseCase(pageParam)).called(once);
       },
     );
 
     test(".resetUser() calls the reset user use case", () async {
       await analyticsNotifier.resetUser();
 
-      verify(resetUserUseCase(any)).called(1);
+      verify(resetUserUseCase(any)).called(once);
     });
 
     test(".resetUser() resets the stored user id", () async {

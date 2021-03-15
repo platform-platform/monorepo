@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 import '../../../../test_utils/auth_notifier_mock.dart';
+import '../../../../test_utils/matchers.dart';
 import '../../../../test_utils/navigation_notifier_mock.dart';
 import '../../../../test_utils/test_injection_container.dart';
 import '../../../../test_utils/theme_notifier_mock.dart';
@@ -34,7 +35,7 @@ void main() {
         await tester.tap(find.byType(Checkbox));
         await tester.pump();
 
-        verify(themeNotifier.toggleTheme()).called(equals(1));
+        verify(themeNotifier.toggleTheme()).called(once);
       },
     );
 
@@ -55,7 +56,7 @@ void main() {
           return tester.pump();
         });
 
-        verify(authNotifier.signOut()).called(equals(1));
+        verify(authNotifier.signOut()).called(once);
       },
     );
 
@@ -74,7 +75,7 @@ void main() {
 
         verify(navigationNotifier.push(
           MetricsRoutes.projectGroups,
-        )).called(equals(1));
+        )).called(once);
       },
     );
   });

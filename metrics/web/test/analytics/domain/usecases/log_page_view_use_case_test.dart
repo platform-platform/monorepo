@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/analytics/domain/entities/page_name.dart';
@@ -8,6 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_utils/analytics_repository_mock.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("LogPageViewUseCase", () {
@@ -31,9 +32,7 @@ void main() {
 
       await logPageViewUseCase(pageNameParam);
 
-      verify(repository.logPageView(
-        pageNameParam.pageName.value,
-      )).called(equals(1));
+      verify(repository.logPageView(pageNameParam.pageName.value)).called(once);
     });
   });
 }

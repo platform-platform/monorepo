@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/analytics/domain/usecases/reset_user_use_case.dart';
@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_utils/analytics_repository_mock.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("ResetUserUseCase", () {
@@ -27,7 +28,7 @@ void main() {
 
       await resetUserUseCase();
 
-      verify(repository.setUserId(null)).called(equals(1));
+      verify(repository.setUserId(null)).called(once);
     });
   });
 }

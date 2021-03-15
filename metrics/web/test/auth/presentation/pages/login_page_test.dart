@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
@@ -22,6 +22,7 @@ import 'package:network_image_mock/network_image_mock.dart';
 
 import '../../../test_utils/auth_notifier_mock.dart';
 import '../../../test_utils/auth_notifier_stub.dart';
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/metrics_themed_testbed.dart';
 import '../../../test_utils/navigation_notifier_mock.dart';
 import '../../../test_utils/router_delegate_stub.dart';
@@ -194,7 +195,7 @@ void main() {
 
         verify(navigationNotifier.pushStateReplacement(
           MetricsRoutes.dashboard,
-        )).called(equals(1));
+        )).called(once);
       },
     );
 
@@ -222,7 +223,7 @@ void main() {
 
         verify(navigationNotifier.pushStateReplacement(
           MetricsRoutes.dashboard,
-        )).called(equals(1));
+        )).called(once);
       },
     );
   });

@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/project_groups/presentation/strings/project_groups_strings.dart';
@@ -6,6 +6,7 @@ import 'package:metrics/project_groups/presentation/widgets/strategy/edit_projec
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../../test_utils/matchers.dart';
 import '../../../../test_utils/project_groups_notifier_mock.dart';
 
 void main() {
@@ -60,7 +61,7 @@ void main() {
 
         verify(
           notifier.updateProjectGroup(id, name, projectIds),
-        ).called(equals(1));
+        ).called(once);
       },
     );
   });

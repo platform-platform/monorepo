@@ -29,6 +29,7 @@ import 'package:metrics/project_groups/presentation/widgets/strategy/project_gro
 import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/metrics_themed_testbed.dart';
 import '../../../test_utils/project_groups_notifier_mock.dart';
 import '../../../test_utils/test_injection_container.dart';
@@ -438,7 +439,7 @@ void main() {
         await tester.pump();
 
         verify(strategy.action(any, groupId, testText, projectIds))
-            .called(equals(1));
+            .called(once);
       },
     );
 
@@ -577,7 +578,7 @@ void main() {
         await tester.enterText(searchFieldFinder, searchText);
 
         verify(projectGroupsNotifier.filterByProjectName(searchText))
-            .called(equals(1));
+            .called(once);
       },
     );
 
@@ -936,7 +937,7 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(projectGroupsNotifier.resetProjectGroupDialogViewModel())
-            .called(equals(1));
+            .called(once);
       },
     );
 
@@ -953,7 +954,7 @@ void main() {
         await closeDialog(tester);
         await tester.pumpAndSettle();
 
-        verify(projectGroupsNotifier.resetFilterName()).called(equals(1));
+        verify(projectGroupsNotifier.resetFilterName()).called(once);
       },
     );
 

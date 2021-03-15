@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:collection/collection.dart';
@@ -10,6 +10,7 @@ import 'package:metrics/common/presentation/navigation/state/navigation_notifier
 import 'package:metrics/common/presentation/pages/loading_page.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../test_utils/matchers.dart' as matchers;
 import '../../../../test_utils/navigation_state_mock.dart';
 
 void main() {
@@ -899,8 +900,9 @@ void main() {
 
         notifier.replaceState(data: data, title: title, path: path);
 
-        verify(navigationState.replaceState(data, title, path))
-            .called(equals(1));
+        verify(
+          navigationState.replaceState(data, title, path),
+        ).called(matchers.once);
       },
     );
   });
