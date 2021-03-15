@@ -1,10 +1,10 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics_core/metrics_core.dart';
 import 'package:test/test.dart';
 
-import '../../test_utils/matcher_util.dart';
+import '../../test_utils/matchers.dart';
 
 void main() {
   group("Project", () {
@@ -15,7 +15,7 @@ void main() {
 
         expect(
           () => Project(name: projectName, id: null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -27,7 +27,7 @@ void main() {
 
         expect(
           () => Project(name: null, id: projectId),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
