@@ -75,6 +75,7 @@ class GithubActionsClient with LoggerMixin {
   /// Creates a new instance of the [GithubActionsClient].
   ///
   /// The [githubApiUrl] defaults to the [GithubActionsConstants.githubApiUrl].
+  /// The [headers] defaults to the [HttpConstants.defaultHeaders].
   ///
   /// Throws an [ArgumentError] if either [githubApiUrl], [repositoryOwner] or
   /// [repositoryName] is `null` or empty.

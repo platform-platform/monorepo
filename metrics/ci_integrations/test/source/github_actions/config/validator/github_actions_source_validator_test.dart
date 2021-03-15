@@ -535,11 +535,11 @@ void main() {
     );
 
     test(
-      ".validate() returns a validation result built by the validation result builder if the workflow identifier validation fails",
+      ".validate() returns a validation result built by the validation result builder if the workflow identifier validation is success",
       () async {
         when(validationResultBuilder.build()).thenReturn(validationResult);
 
-        whenValidateWorkflowId().thenErrorWith();
+        whenValidateWorkflowId().thenSuccessWith(null, message);
 
         final actualResult = await validator.validate(config);
 

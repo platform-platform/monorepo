@@ -138,7 +138,7 @@ void main() {
     );
 
     test(
-      ".headers contain HttpConstants.defaultHeaders as default headers",
+      ".headers contain HttpConstants.defaultHeaders as a default value",
       () {
         final headers = client.headers;
 
