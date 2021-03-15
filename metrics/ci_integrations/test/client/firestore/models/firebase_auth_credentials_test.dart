@@ -53,7 +53,7 @@ void main() {
     );
 
     test(
-      "creates an instance with the given paramers",
+      "creates an instance with the given parameters",
       () {
         final credentials = FirebaseAuthCredentials(
           apiKey: apiKey,

@@ -10,19 +10,20 @@ void main() {
     const mapper = FirestoreExceptionReasonMapper();
 
     test(
-      ".map() maps the consumer invalid firestore exception reason to FirestoreExceptionReason.consumerInvalid",
+      ".map() maps the consumer invalid Firestore exception reason to FirestoreExceptionReason.consumerInvalid",
       () {
         const expectedReason = FirestoreExceptionReason.consumerInvalid;
 
-        final reason =
-            mapper.map(FirestoreExceptionReasonMapper.consumerInvalid);
+        final reason = mapper.map(
+          FirestoreExceptionReasonMapper.consumerInvalid,
+        );
 
         expect(reason, equals(expectedReason));
       },
     );
 
     test(
-      ".map() maps the not found firestore exception reason to FirestoreExceptionReason.notFound",
+      ".map() maps the not found Firestore exception reason to FirestoreExceptionReason.notFound",
       () {
         const expectedReason = FirestoreExceptionReason.notFound;
 
@@ -33,7 +34,7 @@ void main() {
     );
 
     test(
-      ".map() maps the project deleted firestore exception reason to FirestoreExceptionReason.projectDeleted",
+      ".map() maps the project deleted Firestore exception reason to FirestoreExceptionReason.projectDeleted",
       () {
         const expectedReason = FirestoreExceptionReason.projectDeleted;
 
@@ -46,7 +47,7 @@ void main() {
     );
 
     test(
-      ".map() maps the project invalid firestore exception reason to FirestoreExceptionReason.projectInvalid",
+      ".map() maps the project invalid Firestore exception reason to FirestoreExceptionReason.projectInvalid",
       () {
         const expectedReason = FirestoreExceptionReason.projectInvalid;
 
@@ -68,7 +69,7 @@ void main() {
     );
 
     test(
-      ".map() maps the null firestore exception reason to null",
+      ".map() maps the null Firestore exception reason to null",
       () {
         final reason = mapper.map(null);
 
@@ -77,7 +78,7 @@ void main() {
     );
 
     test(
-      ".unmap() unmaps the FirestoreExceptionReason.consumerInvalid to the consumer invalid firestore exception reason",
+      ".unmap() unmaps the FirestoreExceptionReason.consumerInvalid to the consumer invalid Firestore exception reason",
       () {
         const expectedReason = FirestoreExceptionReasonMapper.consumerInvalid;
 
@@ -88,7 +89,7 @@ void main() {
     );
 
     test(
-      ".unmap() unmaps the FirestoreExceptionReason.notFound to the not found firestore exception reason",
+      ".unmap() unmaps the FirestoreExceptionReason.notFound to the not found Firestore exception reason",
       () {
         const expectedReason = FirestoreExceptionReasonMapper.notFound;
 
@@ -99,7 +100,7 @@ void main() {
     );
 
     test(
-      ".unmap() unmaps the FirestoreExceptionReason.projectDeleted to the project deleted firestore exception reason",
+      ".unmap() unmaps the FirestoreExceptionReason.projectDeleted to the project deleted Firestore exception reason",
       () {
         const expectedReason = FirestoreExceptionReasonMapper.projectDeleted;
 
@@ -110,7 +111,7 @@ void main() {
     );
 
     test(
-      ".unmap() unmaps the FirestoreExceptionReason.projectInvalid to the project invalid firestore exception reason",
+      ".unmap() unmaps the FirestoreExceptionReason.projectInvalid to the project invalid Firestore exception reason",
       () {
         const expectedReason = FirestoreExceptionReasonMapper.projectInvalid;
 
@@ -121,7 +122,7 @@ void main() {
     );
 
     test(
-      ".unmap() unmaps null firestore exception reason to null",
+      ".unmap() unmaps null Firestore exception reason to null",
       () {
         final reason = mapper.unmap(null);
 

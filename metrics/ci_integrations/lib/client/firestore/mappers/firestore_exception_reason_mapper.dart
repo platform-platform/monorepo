@@ -7,23 +7,23 @@ import 'package:ci_integration/integration/interface/base/client/mapper/mapper.d
 /// A class that provides methods for mapping [FirestoreExceptionReason]s.
 class FirestoreExceptionReasonMapper
     implements Mapper<String, FirestoreExceptionReason> {
-  /// An exception reason indicating that the provided Firebase project ID is not
-  /// valid or does not exist.
+  /// An exception reason indicating that the provided Firebase project identifier
+  /// is not valid or project with such identifier does not exist.
   static const String consumerInvalid = 'CONSUMER_INVALID';
 
-  /// An exception reason indicating that the provided Firebase with the given
-  /// project ID is not found.
+  /// An exception reason indicating that the provided Firebase project with the
+  /// given project ID is not found.
   static const String notFound = 'NOT_FOUND';
 
   /// An exception reason indicating that the provided Firebase project is
-  /// invalid.
+  /// deleted.
   static const String projectDeleted = 'PROJECT_DELETED';
 
   /// An exception reason indicating that the provided Firebase project is
   /// deleted.
   static const String projectInvalid = 'PROJECT_INVALID';
 
-  /// Creates a new intance of the [FirestoreExceptionReasonMapper].
+  /// Creates a new instance of the [FirestoreExceptionReasonMapper].
   const FirestoreExceptionReasonMapper();
 
   @override
@@ -31,16 +31,12 @@ class FirestoreExceptionReasonMapper
     switch (value) {
       case consumerInvalid:
         return FirestoreExceptionReason.consumerInvalid;
-
       case notFound:
         return FirestoreExceptionReason.notFound;
-
       case projectDeleted:
         return FirestoreExceptionReason.projectDeleted;
-
       case projectInvalid:
         return FirestoreExceptionReason.projectInvalid;
-
       default:
         return null;
     }
@@ -51,13 +47,10 @@ class FirestoreExceptionReasonMapper
     switch (value) {
       case FirestoreExceptionReason.consumerInvalid:
         return consumerInvalid;
-
       case FirestoreExceptionReason.notFound:
         return notFound;
-
       case FirestoreExceptionReason.projectDeleted:
         return projectDeleted;
-
       case FirestoreExceptionReason.projectInvalid:
         return projectInvalid;
     }
