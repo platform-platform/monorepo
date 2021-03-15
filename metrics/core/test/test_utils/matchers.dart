@@ -3,4 +3,6 @@
 
 import 'package:test/test.dart';
 
+/// A matcher that can be used to detect that test case throws
+/// an [AssertionError].
 final Matcher throwsAssertionError = throwsA(isA<AssertionError>());
