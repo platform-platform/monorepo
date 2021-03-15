@@ -140,6 +140,12 @@ void main() {
     test(
       ".headers contain HttpConstants.defaultHeaders as a default value",
       () {
+        final client = GithubActionsClient(
+          githubApiUrl: githubApiUrl,
+          repositoryOwner: repositoryOwner,
+          repositoryName: repositoryName,
+          authorization: authorization,
+        );
         final headers = client.headers;
 
         HttpConstants.defaultHeaders.forEach((expectedKey, expectedValue) {
