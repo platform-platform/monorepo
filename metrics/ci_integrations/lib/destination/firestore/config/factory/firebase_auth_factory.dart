@@ -17,21 +17,4 @@ class FirebaseAuthFactory {
       VolatileStore(),
     );
   }
-
-  ///
-  Future<FirebaseAuth> createAndAuthenticate(
-      String firebaseApiKey, String email, String password) async {
-    ArgumentError.checkNotNull(firebaseApiKey, 'firebaseApiKey');
-    ArgumentError.checkNotNull(email, 'email');
-    ArgumentError.checkNotNull(password, 'password');
-
-    final auth = FirebaseAuth.initialize(
-      firebaseApiKey,
-      VolatileStore(),
-    );
-
-    await auth.signIn(email, password);
-
-    return auth;
-  }
 }
