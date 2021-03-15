@@ -26,6 +26,7 @@ import 'package:firedart/firedart.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../destination/firestore/test_utils/mock/firebase_auth_mock.dart';
 import '../../test_utils/matcher_util.dart';
 import '../test_util/mock/logger_writer_mock.dart';
 import '../test_util/mock/mocks.dart';
@@ -43,7 +44,7 @@ void main() {
       final supportedDestinationParties = SupportedDestinationParties();
 
       final fileMock = FileMock();
-      final _firebaseAuthMock = _FirebaseAuthMock();
+      final _firebaseAuthMock = FirebaseAuthMock();
       final ciIntegrationMock = _CiIntegrationMock();
       final sourceClientMock = SourceClientMock();
       final destinationClientMock = DestinationClientMock();
@@ -399,8 +400,6 @@ void main() {
 }
 
 class _CiIntegrationMock extends Mock implements CiIntegration {}
-
-class _FirebaseAuthMock extends Mock implements FirebaseAuth {}
 
 /// A stub class for a [FirestoreDestinationParty] class providing test
 /// implementation for fields.

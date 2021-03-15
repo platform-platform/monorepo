@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:ci_integration/destination/firestore/adapter/firestore_destination_client_adapter.dart';
@@ -7,6 +7,7 @@ import 'package:firedart/firedart.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../test_utils/mock/firebase_auth_mock.dart';
 import '../test_utils/test_data/firestore_config_test_data.dart';
 
 void main() {
@@ -15,7 +16,7 @@ void main() {
     final email = firestoreConfig.firebaseUserEmail;
     final password = firestoreConfig.firebaseUserPassword;
 
-    final _firebaseAuthMock = _FirebaseAuthMock();
+    final _firebaseAuthMock = FirebaseAuthMock();
     final firestoreClientFactory =
         FirestoreDestinationClientFactory(_firebaseAuthMock);
 
@@ -70,5 +71,3 @@ void main() {
     );
   });
 }
-
-class _FirebaseAuthMock extends Mock implements FirebaseAuth {}

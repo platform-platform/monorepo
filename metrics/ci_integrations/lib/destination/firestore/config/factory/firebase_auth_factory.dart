@@ -1,3 +1,6 @@
+// Use of this source code is governed by the Apache License, Version 2.0
+// that can be found in the LICENSE file.
+
 import 'package:firedart/firedart.dart';
 
 /// A factory class that creates new instance of [FirebaseAuth].

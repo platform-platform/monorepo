@@ -6,10 +6,11 @@ import 'package:ci_integration/destination/firestore/config/factory/firebase_aut
 import 'package:ci_integration/destination/firestore/config/factory/firestore_factory.dart';
 import 'package:ci_integration/destination/firestore/config/validation_delegate/firestore_destination_validation_delegate.dart';
 import 'package:ci_integration/destination/firestore/strings/firestore_strings.dart';
-import 'package:ci_integration/source/jenkins/strings/jenkins_strings.dart';
 import 'package:firedart/firedart.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import '../../test_utils/mock/firebase_auth_mock.dart';
 
 void main() {
   group("FirestoreDestinationValidationDelegate", () {
@@ -27,7 +28,7 @@ void main() {
 
     final authFactory = _FirebaseAuthFactoryMock();
     final firestoreFactory = _FirestoreFactoryMock();
-    final firebaseAuth = _FirebaseAuthMock();
+    final firebaseAuth = FirebaseAuthMock();
 
     final delegate = FirestoreDestinationValidationDelegate(
       authFactory,
@@ -201,5 +202,3 @@ void main() {
 class _FirebaseAuthFactoryMock extends Mock implements FirebaseAuthFactory {}
 
 class _FirestoreFactoryMock extends Mock implements FirestoreFactory {}
-
-class _FirebaseAuthMock extends Mock implements FirebaseAuth {}
