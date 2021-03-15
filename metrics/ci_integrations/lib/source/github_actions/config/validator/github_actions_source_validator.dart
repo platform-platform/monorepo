@@ -41,6 +41,13 @@ class GithubActionsSourceValidator
   @override
   Future<ValidationResult> validate(GithubActionsSourceConfig config) async {
     final accessToken = config.accessToken;
+
+    if (accessToken == null) {
+      return _finalizeValidationResult(
+        GithubActionsStrings.tokenInvalidInterruptReason,
+      );
+    }
+
     final auth = BearerAuthorization(accessToken);
 
     final authInteraction = await validationDelegate.validateAuth(auth);
@@ -105,7 +112,7 @@ class GithubActionsSourceValidator
       );
     }
 
-    return validationResultBuilder.build();
+    return _finalizeValidationResult(GithubActionsStrings.notImplemented);
   }
 
   /// Processes the given [interaction].

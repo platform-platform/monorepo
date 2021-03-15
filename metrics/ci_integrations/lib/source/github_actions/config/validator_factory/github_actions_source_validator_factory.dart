@@ -2,7 +2,6 @@
 // that can be found in the LICENSE file.
 
 import 'package:ci_integration/client/github_actions/github_actions_client.dart';
-import 'package:ci_integration/constants/http_constants.dart';
 import 'package:ci_integration/integration/interface/base/config/validator/config_validator.dart';
 import 'package:ci_integration/integration/interface/base/config/validator_factory/config_validator_factory.dart';
 import 'package:ci_integration/integration/validation/model/validation_result_builder.dart';
@@ -30,7 +29,6 @@ class GithubActionsSourceValidatorFactory
     final githubActionsClient = GithubActionsClient(
       repositoryOwner: config.repositoryOwner,
       repositoryName: config.repositoryName,
-      headers: HttpConstants.defaultHeaders,
       authorization: authorization,
     );
 

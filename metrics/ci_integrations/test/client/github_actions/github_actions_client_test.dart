@@ -9,6 +9,7 @@ import 'package:ci_integration/client/github_actions/models/github_action_conclu
 import 'package:ci_integration/client/github_actions/models/github_action_status.dart';
 import 'package:ci_integration/client/github_actions/models/workflow_run.dart';
 import 'package:ci_integration/client/github_actions/models/workflow_run_job.dart';
+import 'package:ci_integration/constants/http_constants.dart';
 import 'package:ci_integration/util/authorization/authorization.dart';
 import 'package:test/test.dart';
 
@@ -133,6 +134,17 @@ void main() {
           headers,
           containsPair(HttpHeaders.acceptHeader, expectedHeaderValue),
         );
+      },
+    );
+
+    test(
+      ".headers contain HttpConstants.defaultHeaders as default headers",
+      () {
+        final headers = client.headers;
+
+        HttpConstants.defaultHeaders.forEach((expectedKey, expectedValue) {
+          expect(headers, containsPair(expectedKey, expectedValue));
+        });
       },
     );
 

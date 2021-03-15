@@ -18,6 +18,8 @@ import 'package:test/test.dart';
 
 import '../../../../test_utils/extensions/interaction_result_answer.dart';
 
+// ignore_for_file: avoid_redundant_argument_values
+
 void main() {
   group("GithubActionsSourceValidator", () {
     const accessToken = 'accessToken';
@@ -27,6 +29,10 @@ void main() {
     const jobName = 'jobName';
     const coverageArtifactName = 'coverageArtifactName';
     const message = 'message';
+    const githubToken = GithubToken(
+      scopes: [GithubTokenScope.repo],
+    );
+    const result = FieldValidationResult.success();
 
     final config = GithubActionsSourceConfig(
       accessToken: accessToken,
@@ -36,22 +42,14 @@ void main() {
       jobName: jobName,
       coverageArtifactName: coverageArtifactName,
     );
-
     final auth = BearerAuthorization(accessToken);
-
-    const githubToken = GithubToken(
-      scopes: [GithubTokenScope.repo],
-    );
-
     final validationDelegate = _GithubActionsSourceValidationDelegateMock();
     final validationResultBuilder = _ValidationResultBuilderMock();
     final validator = GithubActionsSourceValidator(
       validationDelegate,
       validationResultBuilder,
     );
-
     final field = GithubActionsSourceConfigField.workflowIdentifier;
-    const result = FieldValidationResult.success();
     final validationResult = ValidationResult({
       field: result,
     });
@@ -127,6 +125,30 @@ void main() {
           validator.validationResultBuilder,
           equals(validationResultBuilder),
         );
+      },
+    );
+
+    test(
+      ".validate() sets empty results with the unknown field validation result with the 'token invalid' additional context if the access token is null",
+      () async {
+        final config = GithubActionsSourceConfig(
+          repositoryOwner: repositoryOwner,
+          repositoryName: repositoryName,
+          workflowIdentifier: workflowId,
+          jobName: jobName,
+          coverageArtifactName: coverageArtifactName,
+          accessToken: null,
+        );
+
+        await validator.validate(config);
+
+        verify(
+          validationResultBuilder.setEmptyResults(
+            const FieldValidationResult.unknown(
+              GithubActionsStrings.tokenInvalidInterruptReason,
+            ),
+          ),
+        ).called(1);
       },
     );
 
@@ -434,7 +456,7 @@ void main() {
     );
 
     test(
-      ".validate() delegates validate workflow identifier validation to the validation delegate",
+      ".validate() delegates workflow identifier validation to the validation delegate",
       () async {
         whenValidateWorkflowId().thenErrorWith();
 
@@ -489,6 +511,23 @@ void main() {
           validationResultBuilder.setEmptyResults(
             const FieldValidationResult.unknown(
               GithubActionsStrings.workflowIdInvalidInterruptReason,
+            ),
+          ),
+        ).called(1);
+      },
+    );
+
+    test(
+      ".validate() sets empty results with the unknown field validation result with the 'not implemented' additional context if the workflow identifier validation is success",
+      () async {
+        whenValidateWorkflowId().thenSuccessWith(null, message);
+
+        await validator.validate(config);
+
+        verify(
+          validationResultBuilder.setEmptyResults(
+            const FieldValidationResult.unknown(
+              GithubActionsStrings.notImplemented,
             ),
           ),
         ).called(1);

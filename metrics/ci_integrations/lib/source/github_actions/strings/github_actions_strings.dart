@@ -33,6 +33,7 @@ class GithubActionsStrings {
       "Can't be validated as there is an error while fetching workflow run artifacts.";
   static const String coverageArtifactNameInvalid =
       'The coverage artifact name is invalid.';
+  static const String notImplemented = 'Not implemented.';
 
   static String tokenMissingScopes(String scopes) {
     return 'The access token does not have the required $scopes scope(s).';
