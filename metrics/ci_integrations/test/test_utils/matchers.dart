@@ -4,6 +4,6 @@
 import 'package:ci_integration/cli/error/sync_error.dart';
 import 'package:test/test.dart';
 
-final throwsSyncError = throwsA(isA<SyncError>());
+final Matcher throwsSyncError = throwsA(isA<SyncError>());
 
-final once = equals(1);
+final Matcher once = equals(1);
