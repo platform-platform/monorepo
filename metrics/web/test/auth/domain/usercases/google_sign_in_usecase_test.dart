@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/auth/domain/entities/auth_credentials.dart';
@@ -8,7 +8,7 @@ import 'package:metrics/auth/domain/usecases/google_sign_in_usecase.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/user_repository_mock.dart';
 
 void main() {
@@ -41,7 +41,7 @@ void main() {
     test("throws an AssertionError if the given repository is null", () {
       expect(
         () => GoogleSignInUseCase(null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -54,10 +54,7 @@ void main() {
 
         final signInUseCase = GoogleSignInUseCase(repository);
 
-        expect(
-          () => signInUseCase(),
-          MatcherUtil.throwsAuthenticationException,
-        );
+        expect(() => signInUseCase(), throwsAuthenticationException);
       },
     );
 
@@ -68,10 +65,7 @@ void main() {
 
         final signInUseCase = GoogleSignInUseCase(repository);
 
-        expect(
-          () => signInUseCase(),
-          MatcherUtil.throwsAuthenticationException,
-        );
+        expect(() => signInUseCase(), throwsAuthenticationException);
       },
     );
 
@@ -111,7 +105,7 @@ void main() {
 
       expect(
         () => signInUseCase(),
-        MatcherUtil.throwsAuthenticationException,
+        throwsAuthenticationException,
       );
     });
 
@@ -125,7 +119,7 @@ void main() {
         final signInUseCase = GoogleSignInUseCase(repository);
         await expectLater(
           signInUseCase(),
-          MatcherUtil.throwsAuthenticationException,
+          throwsAuthenticationException,
         );
 
         verifyNever(repository.signInWithGoogle(any));
@@ -140,7 +134,7 @@ void main() {
       final signInUseCase = GoogleSignInUseCase(repository);
       await expectLater(
         signInUseCase(),
-        MatcherUtil.throwsAuthenticationException,
+        throwsAuthenticationException,
       );
       verify(repository.signOut()).called(equals(1));
     });
@@ -173,7 +167,7 @@ void main() {
 
         expect(
           () => signInUseCase(),
-          MatcherUtil.throwsAuthenticationException,
+          throwsAuthenticationException,
         );
       },
     );

@@ -2,10 +2,10 @@
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:metrics/common/presentation/metrics_theme/model/metrics_color/metrics_color.dart';
 
-import '../../../../../test_utils/matcher_util.dart';
+import '../../../../../test_utils/matchers.dart';
 
 void main() {
   group("MetricsColor", () {
@@ -48,7 +48,7 @@ void main() {
       () {
         const nonExistingShade = -1000;
 
-        expect(() => color[nonExistingShade], MatcherUtil.throwsAssertionError);
+        expect(() => color[nonExistingShade], throwsAssertionError);
       },
     );
 

@@ -5,7 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:metrics/project_groups/presentation/view_models/project_group_dialog_view_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("ProjectGroupDialogViewModel", () {
@@ -33,7 +33,7 @@ void main() {
             name: name,
             selectedProjectIds: null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

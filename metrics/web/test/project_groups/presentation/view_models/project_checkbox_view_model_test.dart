@@ -4,7 +4,7 @@
 import 'package:metrics/project_groups/presentation/view_models/project_checkbox_view_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("ProjectCheckboxViewModel", () {
@@ -30,7 +30,7 @@ void main() {
           name: name,
           isChecked: isChecked,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -41,7 +41,7 @@ void main() {
           name: null,
           isChecked: isChecked,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -52,7 +52,7 @@ void main() {
           name: name,
           isChecked: null,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 

@@ -10,7 +10,7 @@ import 'package:metrics/feature_config/presentation/view_models/password_sign_in
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("FeatureConfigNotifier", () {
@@ -44,7 +44,7 @@ void main() {
       () {
         expect(
           () => FeatureConfigNotifier(null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -66,7 +66,7 @@ void main() {
           () => notifier.setDefaults(
             isPasswordSignInOptionEnabled: null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -78,7 +78,7 @@ void main() {
           () => notifier.setDefaults(
             isDebugMenuEnabled: null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

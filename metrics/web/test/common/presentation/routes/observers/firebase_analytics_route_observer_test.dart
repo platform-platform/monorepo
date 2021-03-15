@@ -7,7 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../../test_utils/analytics_notifier_mock.dart';
-import '../../../../test_utils/matcher_util.dart';
+import '../../../../test_utils/matchers.dart';
 
 void main() {
   group("FirebaseAnalyticsObserver", () {
@@ -27,7 +27,7 @@ void main() {
     test("throws an AssertionError if the given notifier is null", () {
       expect(
         () => FirebaseAnalyticsRouteObserver(analyticsNotifier: null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 

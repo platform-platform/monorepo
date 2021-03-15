@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:metrics/analytics/domain/entities/page_name.dart';
@@ -11,7 +11,7 @@ import 'package:metrics/common/domain/usecases/parameters/user_id_param.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("AnalyticsNotifier", () {
@@ -40,7 +40,7 @@ void main() {
       () {
         expect(
           () => AnalyticsNotifier(null, logPageViewUseCase, resetUserUseCase),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -50,7 +50,7 @@ void main() {
       () {
         expect(
           () => AnalyticsNotifier(logLoginUseCase, null, resetUserUseCase),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -60,7 +60,7 @@ void main() {
       () {
         expect(
           () => AnalyticsNotifier(logLoginUseCase, logPageViewUseCase, null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

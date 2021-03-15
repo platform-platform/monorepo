@@ -4,7 +4,7 @@
 import 'package:metrics/common/presentation/models/project_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("ProjectModel", () {
@@ -14,14 +14,14 @@ void main() {
     test("throws an AssertionError if the given id is null", () {
       expect(
         () => ProjectModel(id: null, name: name),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
     test("throws an AssertionError if the given name is null", () {
       expect(
         () => ProjectModel(id: id, name: null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 

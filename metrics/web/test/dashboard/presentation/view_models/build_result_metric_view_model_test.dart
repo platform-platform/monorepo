@@ -6,7 +6,7 @@ import 'package:metrics/dashboard/presentation/view_models/build_result_metric_v
 import 'package:metrics/dashboard/presentation/view_models/build_result_view_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("BuildResultMetricViewModel", () {
@@ -15,7 +15,7 @@ void main() {
         () => BuildResultMetricViewModel(
           buildResults: null,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -27,7 +27,7 @@ void main() {
             buildResults: UnmodifiableListView([]),
             numberOfBuildsToDisplay: null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

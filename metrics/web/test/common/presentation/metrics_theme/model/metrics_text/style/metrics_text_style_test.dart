@@ -1,10 +1,10 @@
 // Use of this source code is governed by the Apache License, Version 2.0 
 // that can be found in the LICENSE file.
 
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:metrics/common/presentation/metrics_theme/model/metrics_text/style/metrics_text_style.dart';
 
-import '../../../../../../test_utils/matcher_util.dart';
+import '../../../../../../test_utils/matchers.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 
@@ -23,7 +23,7 @@ void main() {
             fontSize: fontSize,
             height: height,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

@@ -25,7 +25,7 @@ import 'package:metrics_core/metrics_core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("AuthNotifier", () {
@@ -109,7 +109,7 @@ void main() {
           createUserProfileUseCase,
           updateUserProfileUseCase,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -124,7 +124,7 @@ void main() {
           createUserProfileUseCase,
           updateUserProfileUseCase,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -141,7 +141,7 @@ void main() {
             createUserProfileUseCase,
             updateUserProfileUseCase,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -157,7 +157,7 @@ void main() {
           createUserProfileUseCase,
           updateUserProfileUseCase,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -174,7 +174,7 @@ void main() {
             createUserProfileUseCase,
             updateUserProfileUseCase,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -192,7 +192,7 @@ void main() {
             null,
             updateUserProfileUseCase,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -210,7 +210,7 @@ void main() {
             createUserProfileUseCase,
             null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

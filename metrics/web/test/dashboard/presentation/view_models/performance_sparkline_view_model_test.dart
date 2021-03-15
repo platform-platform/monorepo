@@ -7,7 +7,7 @@ import 'package:collection/collection.dart';
 import 'package:metrics/dashboard/presentation/view_models/performance_sparkline_view_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("PerformanceSparklineViewModel", () {
@@ -16,7 +16,7 @@ void main() {
         () => PerformanceSparklineViewModel(
           performance: null,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -24,7 +24,7 @@ void main() {
       expect(
         () => PerformanceSparklineViewModel(
             value: null, performance: UnmodifiableListView([])),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 

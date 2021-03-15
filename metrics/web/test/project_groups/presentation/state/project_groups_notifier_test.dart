@@ -25,7 +25,7 @@ import 'package:metrics/project_groups/presentation/view_models/project_group_di
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 
@@ -110,7 +110,7 @@ void main() {
             updateProjectGroupUseCase,
             deleteProjectGroupUseCase,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -125,7 +125,7 @@ void main() {
             updateProjectGroupUseCase,
             deleteProjectGroupUseCase,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -140,7 +140,7 @@ void main() {
             null,
             deleteProjectGroupUseCase,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -155,7 +155,7 @@ void main() {
             updateProjectGroupUseCase,
             null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

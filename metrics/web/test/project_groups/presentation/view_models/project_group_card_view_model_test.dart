@@ -4,7 +4,7 @@
 import 'package:metrics/project_groups/presentation/view_models/project_group_card_view_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("ProjectGroupCardViewModel", () {
@@ -30,7 +30,7 @@ void main() {
           name: name,
           projectsCount: projectsCount,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -41,7 +41,7 @@ void main() {
           name: null,
           projectsCount: projectsCount,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -53,7 +53,7 @@ void main() {
           name: name,
           projectsCount: null,
         ),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 

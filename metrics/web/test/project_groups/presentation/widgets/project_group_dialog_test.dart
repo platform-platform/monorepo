@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:collection/collection.dart';
@@ -29,7 +29,6 @@ import 'package:metrics/project_groups/presentation/widgets/strategy/project_gro
 import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
-import '../../../test_utils/matcher_util.dart';
 import '../../../test_utils/metrics_themed_testbed.dart';
 import '../../../test_utils/project_groups_notifier_mock.dart';
 import '../../../test_utils/test_injection_container.dart';
@@ -976,7 +975,7 @@ void main() {
         await closeDialog(tester);
         await tester.pumpAndSettle();
 
-        expect(filterNameController.dispose, MatcherUtil.throwsFlutterError);
+        expect(filterNameController.dispose, throwsFlutterError);
       },
     );
 
@@ -1001,10 +1000,7 @@ void main() {
         await closeDialog(tester);
         await tester.pumpAndSettle();
 
-        expect(
-          isActiveButtonActiveNotifier.dispose,
-          MatcherUtil.throwsFlutterError,
-        );
+        expect(isActiveButtonActiveNotifier.dispose, throwsFlutterError);
       },
     );
 

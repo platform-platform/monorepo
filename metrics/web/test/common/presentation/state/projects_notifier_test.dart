@@ -14,7 +14,7 @@ import 'package:metrics_core/metrics_core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("ProjectsNotifier", () {
@@ -37,7 +37,7 @@ void main() {
     test(
       "throws an AssertionError if the receive project updates use case is null",
       () {
-        expect(() => ProjectsNotifier(null), MatcherUtil.throwsAssertionError);
+        expect(() => ProjectsNotifier(null), throwsAssertionError);
       },
     );
 

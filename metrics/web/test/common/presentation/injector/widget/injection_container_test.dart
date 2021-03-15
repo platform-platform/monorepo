@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
@@ -17,7 +17,6 @@ import 'package:metrics/project_groups/presentation/state/project_groups_notifie
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../test_utils/matcher_util.dart';
 import '../../../../test_utils/metrics_config_stub.dart';
 
 void main() {
@@ -241,8 +240,10 @@ void main() {
 
         await changePage(tester);
 
-        expect(() => authNotifier.notifyListeners(),
-            MatcherUtil.throwsFlutterError);
+        expect(
+          () => authNotifier.notifyListeners(),
+          throwsFlutterError,
+        );
       },
     );
 
@@ -262,7 +263,7 @@ void main() {
 
         expect(
           () => themeNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );
@@ -283,7 +284,7 @@ void main() {
 
         expect(
           () => projectsNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );
@@ -304,7 +305,7 @@ void main() {
 
         expect(
           () => projectMetricsNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );
@@ -325,7 +326,7 @@ void main() {
 
         expect(
           () => projectGroupsNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );
@@ -346,7 +347,7 @@ void main() {
 
         expect(
           () => analyticsNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );
@@ -367,7 +368,7 @@ void main() {
 
         expect(
           () => featureConfigNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );
@@ -388,7 +389,7 @@ void main() {
 
         expect(
           () => debugMenuNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );
@@ -409,7 +410,7 @@ void main() {
 
         expect(
           () => navigationNotifier.notifyListeners(),
-          MatcherUtil.throwsFlutterError,
+          throwsFlutterError,
         );
       },
     );

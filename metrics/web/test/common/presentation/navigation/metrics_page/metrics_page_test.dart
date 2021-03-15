@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
@@ -6,7 +6,7 @@ import 'package:metrics/common/presentation/navigation/metrics_page/metrics_page
 import 'package:metrics/common/presentation/navigation/metrics_page/metrics_page_route.dart';
 import 'package:test/test.dart';
 
-import '../../../../test_utils/matcher_util.dart';
+import '../../../../test_utils/matchers.dart';
 
 void main() {
   group("MetricsPage", () {
@@ -17,7 +17,7 @@ void main() {
       () {
         expect(
           () => MetricsPage(child: null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -27,7 +27,7 @@ void main() {
       () {
         expect(
           () => MetricsPage(child: child, maintainState: null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -37,7 +37,7 @@ void main() {
       () {
         expect(
           () => MetricsPage(child: child, fullscreenDialog: null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

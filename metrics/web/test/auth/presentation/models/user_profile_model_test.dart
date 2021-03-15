@@ -5,7 +5,7 @@ import 'package:metrics/auth/domain/entities/theme_type.dart';
 import 'package:metrics/auth/presentation/models/user_profile_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("UserProfileModel", () {
@@ -15,7 +15,7 @@ void main() {
     test("throws an AssertionError if the given selected theme is null", () {
       expect(
         () => UserProfileModel(id: id, selectedTheme: null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 

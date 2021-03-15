@@ -6,7 +6,7 @@ import 'package:metrics/common/presentation/navigation/constants/metrics_routes.
 import 'package:metrics/common/presentation/navigation/metrics_page/metrics_page_route.dart';
 import 'package:test/test.dart';
 
-import '../../../../test_utils/matcher_util.dart';
+import '../../../../test_utils/matchers.dart';
 
 void main() {
   group("MetricsPageRoute", () {
@@ -18,7 +18,7 @@ void main() {
             builder: null,
             settings: RouteSettings(name: MetricsRoutes.login.path),
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -32,7 +32,7 @@ void main() {
             settings: RouteSettings(name: MetricsRoutes.login.path),
             maintainState: null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -46,7 +46,7 @@ void main() {
             settings: RouteSettings(name: MetricsRoutes.login.path),
             fullscreenDialog: null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

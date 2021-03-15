@@ -4,7 +4,7 @@
 import 'package:metrics/dashboard/presentation/view_models/project_group_dropdown_item_view_model.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("ProjectGroupDropdownItemViewModel", () {
@@ -26,7 +26,7 @@ void main() {
       () {
         expect(
           () => ProjectGroupDropdownItemViewModel(id: id, name: null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

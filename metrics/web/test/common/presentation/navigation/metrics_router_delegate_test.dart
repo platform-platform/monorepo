@@ -11,7 +11,7 @@ import 'package:metrics/common/presentation/navigation/state/navigation_notifier
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/navigation_state_mock.dart';
 import '../../../test_utils/route_configuration_stub.dart';
 
@@ -33,7 +33,7 @@ void main() {
       () {
         expect(
           () => MetricsRouterDelegate(null),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );
@@ -46,7 +46,7 @@ void main() {
             navigationNotifierMock,
             navigatorObservers: null,
           ),
-          MatcherUtil.throwsAssertionError,
+          throwsAssertionError,
         );
       },
     );

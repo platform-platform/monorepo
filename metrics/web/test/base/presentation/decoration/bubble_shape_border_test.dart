@@ -1,10 +1,10 @@
 // Use of this source code is governed by the Apache License, Version 2.0 
 // that can be found in the LICENSE file.
 
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:metrics/base/presentation/decoration/bubble_shape_border.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 
 void main() {
   group("BubbleShapeBorder", () {
@@ -24,28 +24,28 @@ void main() {
     test("throws an AssertionError if the given position is null", () {
       expect(
         () => BubbleShapeBorder(position: null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
     test("throws an AssertionError if the given arrow size is null", () {
       expect(
         () => BubbleShapeBorder(arrowSize: null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
     test("throws an AssertionError if the given offset is null", () {
       expect(
         () => BubbleShapeBorder(offset: null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
     test("throws an AssertionError if the given border radius is null", () {
       expect(
         () => BubbleShapeBorder(borderRadius: null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
   });

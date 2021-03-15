@@ -6,7 +6,7 @@ import 'package:metrics/auth/domain/usecases/receive_authentication_updates.dart
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/user_repository_mock.dart';
 
 void main() {
@@ -20,7 +20,7 @@ void main() {
     test("throws an AssertionError if the given repository is null", () {
       expect(
         () => ReceiveAuthenticationUpdates(null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -42,7 +42,7 @@ void main() {
 
         expect(
           () => receiveUserUpdates(),
-          MatcherUtil.throwsAuthenticationException,
+          throwsAuthenticationException,
         );
       },
     );

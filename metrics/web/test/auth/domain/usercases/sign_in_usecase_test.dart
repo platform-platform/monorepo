@@ -8,7 +8,7 @@ import 'package:metrics_core/metrics_core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../../test_utils/matcher_util.dart';
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/user_repository_mock.dart';
 
 void main() {
@@ -27,7 +27,7 @@ void main() {
     test("throws an AssertionError if the given repository is null", () {
       expect(
         () => SignInUseCase(null),
-        MatcherUtil.throwsAssertionError,
+        throwsAssertionError,
       );
     });
 
@@ -55,7 +55,7 @@ void main() {
 
         expect(
           () => signInUseCase(userCredentials),
-          MatcherUtil.throwsAuthenticationException,
+          throwsAuthenticationException,
         );
       },
     );
