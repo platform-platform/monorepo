@@ -21,6 +21,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_utils/extensions/interaction_result_answer.dart';
+import '../../../test_utils/matchers.dart';
 import '../test_utils/github_actions_client_mock.dart';
 import '../test_utils/test_data/github_actions_test_data_generator.dart';
 
@@ -1113,7 +1114,7 @@ void main() {
         expect(actualCoverage, equals(expectedCoverage));
         verify(
           githubActionsClientMock.fetchRunArtifactsNext(artifactsPage),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -1175,7 +1176,7 @@ void main() {
       () {
         adapter.dispose();
 
-        verify(githubActionsClientMock.close()).called(1);
+        verify(githubActionsClientMock.close()).called(once);
       },
     );
   });

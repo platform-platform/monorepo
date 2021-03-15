@@ -26,6 +26,7 @@ import 'package:ci_integration/source/buildkite/config/model/buildkite_source_co
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../test_utils/matchers.dart';
 import '../test_util/destination_config_stub.dart';
 import '../test_util/mock/destination_party_mock.dart';
 import '../test_util/mock/logger_writer_mock.dart';
@@ -268,7 +269,7 @@ void main() {
 
         commandStub.run();
 
-        verify(rawIntegrationConfigFactory.create(configFilePath)).called(1);
+        verify(rawIntegrationConfigFactory.create(configFilePath)).called(once);
       },
     );
 
@@ -292,7 +293,9 @@ void main() {
 
         commandStub.run();
 
-        verify(configuredPartiesFactory.create(rawIntegrationConfig)).called(1);
+        verify(
+          configuredPartiesFactory.create(rawIntegrationConfig),
+        ).called(once);
       },
     );
 
@@ -318,7 +321,7 @@ void main() {
 
         commandStub.run();
 
-        verify(sourceConfigValidatorFactory.create(sourceConfig)).called(1);
+        verify(sourceConfigValidatorFactory.create(sourceConfig)).called(once);
       },
     );
 
@@ -343,7 +346,7 @@ void main() {
 
         commandStub.run();
 
-        verify(sourceConfigValidator.validate(sourceConfig)).called(1);
+        verify(sourceConfigValidator.validate(sourceConfig)).called(once);
       },
     );
 
@@ -360,7 +363,7 @@ void main() {
 
         verify(writerMock.write(argThat(
           isConfigValidationMessage(sourceConfig),
-        ))).called(1);
+        ))).called(once);
       },
     );
 
@@ -387,7 +390,9 @@ void main() {
 
         await commandStub.run();
 
-        verify(validationResultPrinter.print(sourceValidationResult)).called(1);
+        verify(
+          validationResultPrinter.print(sourceValidationResult),
+        ).called(once);
       },
     );
 
@@ -405,7 +410,7 @@ void main() {
 
         verify(
           destinationConfigValidatorFactory.create(destinationConfig),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -436,7 +441,7 @@ void main() {
 
         verify(
           destinationConfigValidator.validate(destinationConfig),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -454,7 +459,7 @@ void main() {
 
         verify(writerMock.write(argThat(
           isConfigValidationMessage(destinationConfig),
-        ))).called(1);
+        ))).called(once);
       },
     );
 
@@ -484,7 +489,7 @@ void main() {
 
         verify(
           validationResultPrinter.print(destinationValidationResult),
-        ).called(1);
+        ).called(once);
       },
     );
   });

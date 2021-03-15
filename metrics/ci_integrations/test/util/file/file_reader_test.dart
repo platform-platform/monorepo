@@ -7,6 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../cli/test_util/mock/file_mock.dart';
+import '../../test_utils/matchers.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 
@@ -55,7 +56,7 @@ void main() {
 
         reader.read(path);
 
-        verify(fileHelper.getFile(path)).called(1);
+        verify(fileHelper.getFile(path)).called(once);
       },
     );
 

@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:ci_integration/destination/firestore/adapter/firestore_destination_client_adapter.dart';
@@ -7,6 +7,7 @@ import 'package:firedart/firedart.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../test_utils/test_data/firestore_config_test_data.dart';
 
 void main() {
@@ -52,7 +53,7 @@ void main() {
 
       adapter = await firestoreClientFactory.create(firestoreConfig);
 
-      verify(_firebaseAuthMock.signIn(email, password)).called(1);
+      verify(_firebaseAuthMock.signIn(email, password)).called(once);
     });
 
     test(

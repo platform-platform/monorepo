@@ -17,6 +17,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../../test_utils/extensions/interaction_result_answer.dart';
+import '../../../../test_utils/matchers.dart';
 
 void main() {
   group("BuildkiteSourceValidator", () {
@@ -134,7 +135,7 @@ void main() {
 
         validator.validate(config);
 
-        verify(validationDelegate.validateAuth(expectedAuth)).called(1);
+        verify(validationDelegate.validateAuth(expectedAuth)).called(once);
       },
     );
 
@@ -150,7 +151,7 @@ void main() {
             BuildkiteSourceConfigField.accessToken,
             const FieldValidationResult.success(message),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -166,7 +167,7 @@ void main() {
             BuildkiteSourceConfigField.accessToken,
             const FieldValidationResult.failure(message),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -183,7 +184,7 @@ void main() {
               BuildkiteStrings.tokenInvalidInterruptReason,
             ),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -235,7 +236,7 @@ void main() {
               BuildkiteStrings.noScopesToValidateOrganization,
             ),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -252,7 +253,7 @@ void main() {
               BuildkiteStrings.organizationCantBeValidatedInterruptReason,
             ),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -301,7 +302,7 @@ void main() {
 
         verify(
           validationDelegate.validateOrganizationSlug(organizationSlug),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -319,7 +320,7 @@ void main() {
             BuildkiteSourceConfigField.organizationSlug,
             const FieldValidationResult.success(message),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -337,7 +338,7 @@ void main() {
             BuildkiteSourceConfigField.organizationSlug,
             const FieldValidationResult.failure(message),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -356,7 +357,7 @@ void main() {
               BuildkiteStrings.organizationInvalidInterruptReason,
             ),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -403,7 +404,7 @@ void main() {
               BuildkiteStrings.noScopesToValidatePipeline,
             ),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -443,7 +444,7 @@ void main() {
 
         verify(
           validationDelegate.validatePipelineSlug(pipelineSlug),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -459,7 +460,7 @@ void main() {
             BuildkiteSourceConfigField.pipelineSlug,
             const FieldValidationResult.success(message),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 
@@ -475,7 +476,7 @@ void main() {
             BuildkiteSourceConfigField.pipelineSlug,
             const FieldValidationResult.failure(message),
           ),
-        ).called(1);
+        ).called(once);
       },
     );
 

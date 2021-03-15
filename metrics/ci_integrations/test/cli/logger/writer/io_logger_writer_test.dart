@@ -7,6 +7,7 @@ import 'package:ci_integration/cli/logger/writer/io_logger_writer.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../../../test_utils/mock/io_sink_mock.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -46,7 +47,7 @@ void main() {
 
       writer.write(testMessage);
 
-      verify(messageSinkMock.writeln(testMessage)).called(1);
+      verify(messageSinkMock.writeln(testMessage)).called(once);
     });
   });
 }

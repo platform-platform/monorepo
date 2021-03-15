@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:ci_integration/cli/logger/logger.dart';
@@ -6,6 +6,7 @@ import 'package:ci_integration/cli/logger/manager/logger_manager.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../test_utils/matchers.dart';
 import '../test_util/mock/logger_factory_mock.dart';
 import '../test_util/mock/logger_writer_mock.dart';
 
@@ -107,7 +108,7 @@ void main() {
         final actualLogger = Logger.forClass(sourceClass);
 
         expect(actualLogger, equals(expectedLogger));
-        verify(loggerFactoryMock.create(sourceClass)).called(1);
+        verify(loggerFactoryMock.create(sourceClass)).called(once);
       },
     );
 
@@ -128,7 +129,7 @@ void main() {
         expect(logger, isNotNull);
         expect(logger.sourceClass, equals(sourceClass));
         expect(secondLogger, same(logger));
-        verify(loggerFactoryMock.create(sourceClass)).called(1);
+        verify(loggerFactoryMock.create(sourceClass)).called(once);
       },
     );
 
@@ -139,7 +140,7 @@ void main() {
 
         logger.message(message);
 
-        verify(writerMock.write(message)).called(1);
+        verify(writerMock.write(message)).called(once);
       },
     );
 
@@ -153,7 +154,7 @@ void main() {
           (log) => matchesPrefixes(log, '$testSourceClass', message),
         );
 
-        verify(writerMock.write(argThat(logMatcher))).called(1);
+        verify(writerMock.write(argThat(logMatcher))).called(once);
       },
     );
 
@@ -177,7 +178,7 @@ void main() {
 
         verify(writerMock.write(
           argThat(contains(message)),
-        )).called(1);
+        )).called(once);
       },
     );
 
@@ -191,7 +192,7 @@ void main() {
           (log) => matchesPrefixes(log, '$testSourceClass', message),
         );
 
-        verify(writerMock.write(argThat(logMatcher))).called(1);
+        verify(writerMock.write(argThat(logMatcher))).called(once);
       },
     );
   });

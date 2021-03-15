@@ -26,7 +26,7 @@ import 'package:firedart/firedart.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../../test_utils/matcher_util.dart';
+import '../../test_utils/matchers.dart';
 import '../test_util/mock/logger_writer_mock.dart';
 import '../test_util/mock/mocks.dart';
 import '../test_util/test_data/config_test_data.dart';
@@ -252,7 +252,7 @@ void main() {
         () async {
           when(fileMock.existsSync()).thenReturn(false);
 
-          expect(syncCommand.run(), MatcherUtil.throwsSyncError);
+          expect(syncCommand.run(), throwsSyncError);
         },
       );
 
@@ -261,7 +261,7 @@ void main() {
         () async {
           when(fileMock.existsSync()).thenReturn(false);
 
-          expect(syncCommand.run(), MatcherUtil.throwsSyncError);
+          expect(syncCommand.run(), throwsSyncError);
           verifyNever(ciIntegrationMock.sync(any));
         },
       );
@@ -281,7 +281,7 @@ void main() {
       test(".run() calls dispose once if sync throws", () async {
         whenRunSync().thenThrow(Exception());
 
-        await expectLater(syncCommand.run(), MatcherUtil.throwsSyncError);
+        await expectLater(syncCommand.run(), throwsSyncError);
         expect(syncCommand.disposeCallCount, equals(1));
       });
 
@@ -289,7 +289,7 @@ void main() {
         when(destinationPartiesMock.parties).thenReturn([]);
         whenRunSync().thenThrow(Exception());
 
-        expect(syncCommand.run(), MatcherUtil.throwsSyncError);
+        expect(syncCommand.run(), throwsSyncError);
       });
 
       test(
@@ -305,7 +305,7 @@ void main() {
 
           verify(
             ciIntegrationMock.sync(syncConfig),
-          ).called(1);
+          ).called(once);
         },
       );
 
@@ -323,7 +323,7 @@ void main() {
             destinationClientMock,
           );
 
-          verify(writerMock.write(any)).called(1);
+          verify(writerMock.write(any)).called(once);
         },
       );
 
@@ -341,7 +341,7 @@ void main() {
             destinationClientMock,
           );
 
-          expect(syncFuture, MatcherUtil.throwsSyncError);
+          expect(syncFuture, throwsSyncError);
         },
       );
 
@@ -377,7 +377,7 @@ void main() {
             destinationClientMock,
           );
 
-          verify(sourceClientMock.dispose()).called(1);
+          verify(sourceClientMock.dispose()).called(once);
         },
       );
 
@@ -391,7 +391,7 @@ void main() {
             destinationClientMock,
           );
 
-          verify(destinationClientMock.dispose()).called(1);
+          verify(destinationClientMock.dispose()).called(once);
         },
       );
     },

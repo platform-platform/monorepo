@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'package:ci_integration/cli/logger/factory/logger_factory.dart';
@@ -6,6 +6,7 @@ import 'package:ci_integration/cli/logger/writer/io_logger_writer.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../../test_util/mock/logger_writer_mock.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -78,7 +79,7 @@ void main() {
         writerMock.write(
           argThat(contains(testMessage)),
         ),
-      ).called(1);
+      ).called(once);
     });
 
     test(".create() creates a new logger with the specified verbose value", () {
@@ -91,7 +92,7 @@ void main() {
         writerMock.write(
           argThat(contains(testMessage)),
         ),
-      ).called(1);
+      ).called(once);
     });
   });
 }

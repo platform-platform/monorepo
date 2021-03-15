@@ -15,6 +15,7 @@ import 'package:ci_integration/integration/interface/source/party/source_party.d
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_utils/matchers.dart';
 import '../../test_util/destination_config_stub.dart';
 import '../../test_util/mock/config_parser_mock.dart';
 import '../../test_util/mock/parties_mock.dart';
@@ -135,7 +136,7 @@ void main() {
 
         configuredPartiesFactory.create(rawConfig);
 
-        verify(sourceParties.getParty(sourceConfigMap)).called(1);
+        verify(sourceParties.getParty(sourceConfigMap)).called(once);
       },
     );
 
@@ -147,7 +148,7 @@ void main() {
 
         configuredPartiesFactory.create(rawConfig);
 
-        verify(sourceConfigParser.parse(sourceConfigMap)).called(1);
+        verify(sourceConfigParser.parse(sourceConfigMap)).called(once);
       },
     );
 
@@ -159,7 +160,7 @@ void main() {
 
         configuredPartiesFactory.create(rawConfig);
 
-        verify(destinationParties.getParty(destinationConfigMap)).called(1);
+        verify(destinationParties.getParty(destinationConfigMap)).called(once);
       },
     );
 
@@ -171,7 +172,9 @@ void main() {
 
         configuredPartiesFactory.create(rawConfig);
 
-        verify(destinationConfigParser.parse(destinationConfigMap)).called(1);
+        verify(
+          destinationConfigParser.parse(destinationConfigMap),
+        ).called(once);
       },
     );
 

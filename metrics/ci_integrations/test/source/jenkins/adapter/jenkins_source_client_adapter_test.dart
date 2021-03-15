@@ -15,6 +15,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_utils/extensions/interaction_result_answer.dart';
+import '../../../test_utils/matchers.dart';
 import '../test_utils/jenkins_client_mock.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -674,7 +675,7 @@ void main() {
     test(".dispose() closes the Jenkins client", () {
       adapter.dispose();
 
-      verify(jenkinsClientMock.close()).called(1);
+      verify(jenkinsClientMock.close()).called(once);
     });
   });
 }

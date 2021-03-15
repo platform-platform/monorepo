@@ -8,6 +8,8 @@ import 'package:ci_integration/util/file/file_reader.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../../../test_utils/matchers.dart';
+
 // ignore_for_file: avoid_redundant_argument_values
 
 void main() {
@@ -77,7 +79,7 @@ void main() {
       () {
         configFactory.create(configPath);
 
-        verify(fileReader.read(configPath)).called(1);
+        verify(fileReader.read(configPath)).called(once);
       },
     );
 
@@ -88,7 +90,7 @@ void main() {
 
         configFactory.create(configPath);
 
-        verify(rawConfigParser.parse(content)).called(1);
+        verify(rawConfigParser.parse(content)).called(once);
       },
     );
 

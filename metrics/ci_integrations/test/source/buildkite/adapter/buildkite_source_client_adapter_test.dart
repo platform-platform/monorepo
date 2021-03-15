@@ -1,4 +1,4 @@
-// Use of this source code is governed by the Apache License, Version 2.0 
+// Use of this source code is governed by the Apache License, Version 2.0
 // that can be found in the LICENSE file.
 
 import 'dart:async';
@@ -17,6 +17,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../test_utils/extensions/interaction_result_answer.dart';
+import '../../../test_utils/matchers.dart';
 import '../test_utils/buildkite_client_mock.dart';
 import '../test_utils/test_data/buildkite_test_data_generator.dart';
 
@@ -820,7 +821,9 @@ void main() {
         final result = await adapter.fetchCoverage(defaultBuild);
 
         expect(result, isNotNull);
-        verify(buildkiteClientMock.fetchArtifactsNext(artifactsPage)).called(1);
+        verify(
+          buildkiteClientMock.fetchArtifactsNext(artifactsPage),
+        ).called(once);
       },
     );
 
@@ -862,7 +865,7 @@ void main() {
     test(".dispose() closes the Buildkite client", () {
       adapter.dispose();
 
-      verify(buildkiteClientMock.close()).called(1);
+      verify(buildkiteClientMock.close()).called(once);
     });
   });
 }

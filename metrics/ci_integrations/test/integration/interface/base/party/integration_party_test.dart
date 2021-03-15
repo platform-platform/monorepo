@@ -11,6 +11,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../../../../cli/test_util/mock/config_parser_mock.dart';
+import '../../../../test_utils/matchers.dart';
 
 void main() {
   group("IntegrationParty", () {
@@ -28,7 +29,7 @@ void main() {
       () {
         integrationParty.acceptsConfig(config);
 
-        verify(configParser.canParse(config)).called(1);
+        verify(configParser.canParse(config)).called(once);
       },
     );
 
